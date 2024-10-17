@@ -1,0 +1,29 @@
+.texte {
+    position: fixed;
+    font-family: cursive;
+    position: fixed;
+    font-size: 19px;
+    top: 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    left: 880px;
+}
+h1 {
+    color: rgba(141, 141, 244, 0.889);
+    text-align: center;
+    justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.map{
+    position: fixed;
+    bottom: 150px;
+    left: 100px;
+    opacity: 0.8;
+}
+
+.maison-de-sante{
+    width: 400px;
+    border-radius: 10px;
+}

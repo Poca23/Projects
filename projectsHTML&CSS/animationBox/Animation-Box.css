@@ -1,0 +1,162 @@
+.div-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* -------------------------------------- */
+/*box rotate*/
+.box1rotate {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  background-image: url(bébé-dragon.jpg);
+  background-size: cover;
+  background-position: center;
+  display: block;
+  margin: auto;
+  box-shadow: 0px 0px 50px 30px rgba(5, 5, 5, 0.499);
+  animation: rotate 10s infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(180deg);
+  }
+  90% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* -------------------------------------- */
+/*box-pulse*/
+.box2pulse {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  background-image: url(Bibliothèque.jpg);
+  background-size: cover;
+  background-position: center;
+  display: block;
+  margin: auto;
+  box-shadow: 0px 0px 50px 30px rgba(137, 95, 6, 0.257);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2.2);
+  }
+}
+
+/* -------------------------------------- */
+/*box slide right*/
+.box3slide-right {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  background-image: url(html-5.png);
+  background-size: cover;
+  background-position: center;
+  display: block;
+  margin: auto;
+  box-shadow: 0px 0px 50px 30px rgba(163, 113, 7, 0.551);
+  animation: slide-right 3s infinite;
+}
+@keyframes slide-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}
+/* -------------------------------------- */
+/*box slide left*/
+.box4slide-left {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  background-image: url(épée.png);
+  background-size: cover;
+  background-position: center;
+  display: block;
+  margin: auto;
+  box-shadow: 0px 0px 50px 30px rgba(12, 77, 6, 0.67);
+  animation: slide-left 3s infinite;
+}
+@keyframes slide-left {
+  0% {
+    transform: translateX(50%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+/* -------------------------------------- */
+
+.div-secondaire {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* -------------------------------------- */
+/*box fondue*/
+.box5fondue {
+  border-radius: 180px 10px 10px 10px;
+  width: 150px;
+  height: 150px;
+  background-image: url(2024.png);
+  background-size: cover;
+  background-position: center;
+  display: block;
+  margin: auto;
+  box-shadow: 0px 0px 50px 30px rgb(79, 128, 207);
+  animation: fade-in 3s infinite;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+/* -------------------------------------- */
+/*box bounce*/
+.box6bounce {
+  border-radius: 10px 180px 10px 10px;
+  width: 150px;
+  height: 150px;
+  background-image: url(clavier.jpg);
+  background-size: cover;
+  background-position: center;
+  display: block;
+  margin: auto;
+  box-shadow: 0px 0px 50px 30px rgba(182, 29, 187, 0.671);
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  }
+  80% {
+    transform: translateY(-10px);
+  }
+}

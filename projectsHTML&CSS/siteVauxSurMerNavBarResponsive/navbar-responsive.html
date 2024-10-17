@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Sert à otpimiser l'aspect responsive d'une page html -->
+    <title>Navbar responsive déroulant</title>
+    <!-- On fait le lien avec le fichier en css -->
+    <link rel="stylesheet" href="navbar-responsive.css">
+</head>
+
+<body>
+    <!-- On crée le squelette en html -->
+    <!-- Menu -->
+    <nav> <!-- nav sert à encadrer un menu principal de navigation -->
+        <div class="titre">weekend à la mer</div>
+        <!-- Difficile de proposer un menu responsive juste avec html et css, 
+            il faudra utiliser des techniques un peu étranges, la solution ici est de créer une case à cocher 
+            en html avec les éléments input de type checkbox l'idéee est d'afficher notre menu en css lorsque la 
+            case a été cochée, et l'idée est d'afficher une autre version du menu quand la case est 
+            cochée, et cette case a cocher ne pourrait l'être que pour une certaine taille d'écran, par défaut elle
+            sera cachéee, on cachera l'élément input. -->
+        <!-- case à cocher pour la version responsive de notre menu -->
+        <label for="menu-mobile" class="menu-mobile">Menu</label>
+        <input type="checkbox" id="menu-mobile" role="button">
+        <!-- titre -->
+
+
+        <ul><!-- 1er niveau de menu ul avec des li-->
+            <!-- Plage -->
+            <li class="menu-plage"><a href="#">Plage</a>
+                <ul class="sous-menu"> <!-- 2ème niveau de menu ul avec des li-->
+                    <li><a href="# ">Photos</a></li>
+                    <!--on ne créera pas de page avec les liens a, d'ou le # qui neutralisent le lien href-->
+                    <li><a href="#">Miam</a></li>
+                    <li><a href="#">Activités</a></li>
+                    <li><a href="#">Bonus</a></li>
+                </ul>
+            </li>
+            <!-- Mer -->
+            <li class="menu-mer"><a href="#">Mer</a>
+                <ul class="sous-menu"><!-- 2ème niveau de menu ul avec des li-->
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Miam</a></li>
+                    <li><a href="#">Activités</a></li>
+                    <li><a href="#">Bonus</a></li>
+                </ul>
+            </li>
+            <!-- Hôtel -->
+            <li class="menu-hôtel"><a href="#">Hôtel</a>
+                <ul class="sous-menu"><!-- 2ème niveau de menu ul avec des li-->
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Miam</a></li>
+                    <li><a href="#">Activités</a></li>
+                    <li><a href="#">Bonus</a></li>
+                </ul>
+            </li>
+            <!-- Promenade -->
+            <li class="menu-promenade"><a href="#">Promenade</a>
+                <ul class="sous-menu"><!-- 2ème niveau de menu ul avec des li-->
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Miam</a></li>
+                    <li><a href="#">Activités</a></li>
+                    <li><a href="#">Bonus</a></li>
+                </ul>
+            </li>
+            <!-- Témoignages -->
+            <li class="menu-témoignages"><a href="#">Témoignages</a></li>
+        </ul>
+    </nav>
+
+
+</body>
+
+</html>

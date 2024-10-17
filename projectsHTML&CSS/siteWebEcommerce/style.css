@@ -1,0 +1,194 @@
+/* RESET */
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Robot Slab", sans-serif;
+}
+/* ////////////////////////////////////////////////// */
+/* BODY */
+body {
+  height: 100%;
+}
+
+/* NAVBAR */
+.navbar {
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0%;
+  z-index: 999;
+  background-color: rgb(37, 37, 37);
+}
+
+.navbar .logo h1 {
+  color: rgb(226, 226, 226);
+  cursor: pointer;
+}
+
+.menu li {
+  list-style: none;
+  display: inline-block;
+}
+
+.navbar .menu li a {
+  display: block;
+  margin-left: 20px;
+  color: rgb(226, 226, 226);
+  border-bottom: 4px solid transparent;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.navbar .menu li .active {
+  border-bottom: 4px solid brown;
+}
+
+.navbar .menu li a:hover {
+  border-bottom: 4px solid brown;
+}
+
+/* Section Actualités */
+.content {
+  background-image: url(assets/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: rgb(226, 226, 226);
+  height: 100vh;
+  position: right;
+}
+
+.content > h1,
+.paragrapheActualite,
+.btnDecouvrir {
+  margin-left: 50%;
+  margin-right: 10%;
+  margin-top: 30px;
+}
+
+.content h1 {
+  font-size: 40px;
+}
+
+.content > .paragrapheActualite {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.content .btnDecouvrir {
+  margin-top: 30px;
+  padding: 15px 30px;
+  border: none;
+  background-color: brown;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgb(226, 226, 226);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Section Produits */
+.produits_texte {
+  text-align: left;
+  font-size: 30px;
+  font-weight: 300;
+  margin-top: 30px;
+  margin-left: 80px;
+  color: rgb(37, 37, 37);
+}
+
+.section_produits {
+  margin: auto;
+  padding: 40px 5%;
+}
+
+.produits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.produits .carte {
+  width: 310px;
+  background: #f1f1f1;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.produits .carte img {
+  height: 250px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.produits .carte .description {
+  padding: 5px 20px;
+  opacity: 0.8;
+}
+
+.produits .carte .titre {
+  font-weight: 900;
+  font-size: 20px;
+  color: rgb(37, 37, 37);
+  padding: 0 20px;
+}
+
+.produits .carte .box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.produits .carte .prix {
+  color: crimson;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.produits .carte .box .btnAcheter {
+  font-size: 13px;
+  font-weight: 900;
+  color: crimson;
+  padding: 10px 18px;
+  border-radius: 5px;
+}
+
+.produits .carte .box .btnAcheter:hover {
+  cursor: pointer;
+  color: crimson;
+  background-color: rgb(37, 37, 37);
+}
+
+/* FOOTER */
+footer {
+  background: rgb(37, 37, 37);
+  height: 10vh;
+}
+
+footer .copyrights {
+  text-align: center;
+  line-height: 10vh;
+  color: rgb(226, 226, 226);
+}
+
+footer .copyrights a {
+  text-decoration: none;
+  color: rgb(226, 226, 226);
+  font-weight: bold;
+}
+footer .copyrights a:hover {
+  text-decoration: none;
+  color: crimson;
+  font-weight: bold;
+}

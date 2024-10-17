@@ -1,0 +1,104 @@
+/*--Projet de BD avec HTML et CSS  --*/
+body{
+    background-color: black;
+}
+/*---------------------------------------------------*/
+/*  Paragraphes  */
+p {
+    color: black;
+    background-color: white;
+    font-size: 14px;
+    font-family: "Protest Revolution", sans-serif;
+    text-align:center;
+    height: 35px;
+    border-radius: 15px;
+}
+/*---------------------------------------------------*/
+/*  images */
+
+/*---------------------------------------------------*/
+/*  Slider */
+.slider {
+    width: 500px;/*taille d'une image*/
+    height: 70vh;
+    overflow: hidden;
+    margin: 100px auto; /*pour mieux centrer l'image à l'écran*/
+}
+/*---------------------------------------------------*/
+/*  Slides  */
+.slides {
+    width: calc(500px * 7);
+    animation: glisse 35s infinite;
+}
+.slides:hover {
+    animation-play-state: paused;/*mettre à l'arrêt le défilement*/
+}
+/*---------------------------------------------------*/
+/*  Slide  */
+.slide {
+    float: left;
+    min-width: 500px;
+    min-height: 385px;
+    max-width: 500px;
+    max-height: 385px;
+}
+/*---------------------------------------------------*/
+/*  Keyframes  */
+@keyframes glisse {
+    0% {
+        transform: translateX(0);
+        /*position de base à zéro, 
+        à rajouter en fonction du nombre de'images que l'on a,
+        à apprendre plus tard*/
+    }
+    8% {
+        transform: translateX(0);
+        /*position pour maintenir l'image plus longtemps immobile*/
+    }
+    16% { /*16% parce que 100% des images diviséées par 6 = environ 16%*/
+        transform: translateX(-500px);
+        /*position image1*/
+    }
+    20% {
+        transform: translateX(-500px);
+    }
+    32% {
+        transform: translateX(-1000px);
+        /*position image2*/    
+    }
+    38% {
+        transform: translateX(-1000px);
+        /*position image2*/
+    }
+    48% {
+        transform: translateX(-1500px);
+        /*position image3*/
+    }
+    54% {
+        transform: translateX(-1500px);
+    }
+    64% {
+        transform: translateX(-2000px);
+        /*position image4*/
+    }
+    69% {
+        transform: translateX(-2000px);
+    }
+    80% {
+        transform: translateX(-2500px);
+        /*position image5*/
+    }
+    88% {
+        transform: translateX(-2500px);
+    }
+    88% {
+        transform: translateX(-3000px);
+    }
+    95% {
+        transform: translateX(-3000px);
+    }
+    100% {
+        transform: translateX(0);/*pour revenir à zéro*/
+        /*position image6*/
+    }/*Fin de l'animation et retour au début*/
+}

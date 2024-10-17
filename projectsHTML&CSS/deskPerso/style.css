@@ -1,0 +1,225 @@
+/* Desk-macbook */
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+body {
+  background-image: url(assets/boat.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: auto;
+  overflow: hidden;
+}
+/* button */
+button {
+  background: none;
+  padding: 2px 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 25%;
+  box-shadow: 0px 3px rgba(10, 7, 7, 0.256);
+  filter: drop-shadow(0px 0px 3px rgba(233, 229, 229, 0.761));
+  outline: none;
+}
+
+button:hover {
+  box-shadow: 0px 3.5px rgba(255, 255, 255, 0.96);
+  transform: translateY(1px);
+}
+
+button:active {
+  box-shadow: 0px 2px rgba(255, 255, 255, 0.96);
+  transform: translateY(3px);
+}
+/* -------------------------------------------- */
+/* -------------------------------------------- */
+/* top */
+#top {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* top-left-bar */
+#tlb {
+  /* border: 3px dotted rgb(164, 39, 141); */
+  display: flex;
+  /* background-color: rgba(151, 198, 221, 0.176); */
+  border-radius: 5px;
+}
+
+#top-left-bar > ul {
+  float: right;
+  display: flex;
+}
+
+#top-left-bar > ul > li {
+  padding: 5px;
+}
+
+#block-menu {
+  position: absolute;
+  padding-top: 0.2px;
+  margin-top: 4.5px;
+  display: none;
+}
+#block-menu > li {
+  padding: 1.9px;
+  border-radius: 15px;
+}
+
+#menu:hover > #block-menu {
+  display: block;
+  position: absolute;
+}
+
+#block-menu > li:hover {
+  background-color: rgba(240, 248, 255, 0.089);
+  display: inline-block;
+  filter: drop-shadow(1px 1px rgba(251, 248, 248, 0.474));
+}
+
+/* -------------------------------------------- */
+
+/* top-right-bar */
+#trb {
+  /* background-color: rgba(151, 198, 221, 0.176); */
+  border-radius: 5px;
+}
+#top-right-bar {
+}
+
+#top-right-bar > ul {
+  float: right;
+  display: flex;
+}
+#top-right-bar > ul > li {
+  padding: 5px;
+}
+/* -------------------------------------------- */
+/* -------------------------------------------- */
+/* bottom */
+/* bottom right */
+#bottom {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: space-between;
+  align-items: flex-end;
+  /* border: 2px solid; */
+}
+
+/* -------------------------------------------- */
+/* bottom-left-bar */
+#blb {
+  display: flex;
+  padding: 5px;
+  margin-top: -5px;
+}
+
+#bottom-left-bar > ul {
+  display: flex;
+}
+
+#bottom-left-bar > ul > li > #block-menu-bottom-left-reseau {
+  margin-top: -122px;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+#block-menu-bottom-left-reseau > li {
+  padding: 1.8px;
+  margin-left: 2px;
+}
+
+#reseau:hover #block-menu-bottom-left-reseau {
+  display: block;
+  position: absolute;
+}
+
+#bottom-left-bar > ul > li > #block-menu-bottom-left-social {
+  margin-top: -149.5px;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+#block-menu-bottom-left-social > li {
+  padding: 1.3px;
+}
+
+#appel {
+  margin-left: -7px;
+}
+
+#social:hover #block-menu-bottom-left-social {
+  display: block;
+  position: absolute;
+}
+
+/* -------------------------------------------- */
+/* bottom middle */
+#bmb {
+  display: flex;
+  padding: 5px;
+  margin-top: -5px;
+}
+
+#bottom-middle-bar > ul {
+  display: flex;
+}
+
+#bottom-middle-bar > ul > li > #block-menu-bottom-middle-media {
+  margin-top: -124px;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+#block-menu-bottom-middle-media > li {
+  padding: 2.3px;
+}
+
+#media:hover #block-menu-bottom-middle-media {
+  display: block;
+  position: absolute;
+}
+
+#bottom-middle-bar > ul > li > #block-menu-bottom-middle-navigateur {
+  margin-top: -157px;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+#block-menu-bottom-middle-navigateur > li {
+  padding: 2.3px;
+}
+
+#navigateur:hover #block-menu-bottom-middle-navigateur {
+  position: absolute;
+  display: block;
+}
+
+/* -------------------------------------------- */
+/* bottom right */
+#brb {
+  display: flex;
+  padding: 5px;
+  margin-top: -5px;
+}
+
+#bottom-right-bar > ul {
+  display: flex;
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr
+">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Landing Page CEFIM</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="script.js"></script> -->
+</head>
+
+<body>
+
+    <h3 style="text-align: center;">Landing Page - CEFIM</h3>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="assets/Logo.png" alt="Logo">
+        </a>
+        <!-- bouton -->
+        <button type="button" aria-label="toggle curtain navigation" class="nav-toggler">
+            <span class="line l1"></span>
+            <span class="line l2"></span>
+            <span class="line l3"></span>
+        </button>
+        <div class="nav-links">
+            <ul>
+                <li><a href="#">A propos</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">L'équipe</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <header>
+        <div class="header2">
+            <div class="header2Bloc">
+                <h1>SUPER APP <br> <small>L'application trop super !</small>
+                </h1>
+                <hr class="sepHeader2">
+                <div class="headerLiens">
+                    <button><a href="#"><img src="assets/thumbs-up.png" alt="Like">Like it</a></button>
+                    <button><a href="#"><img src="assets/heart-shape-silhouette.png" alt="Love">Love it</a></button>
+                    <button><a href="#"><img src="assets/shopping-cart-black-shape.png" alt="Buy">Buy it</a></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- MAIN #00000000 -->
+    <main>
+        <div class="main2">
+            <h3>ELLE FAIT DES TRUCS SUPERS !</h3>
+            <p>
+                <!-- backg icon #DD5555 -->
+            <div class="main2Icon">
+                <div class="main2Icons">
+                    <div class="blocIcon">
+                        <img src="assets/fork-and-knife-silhouette.png" alt="Mettre la table">Mettre
+                        la table
+                        <p>Lorem ipsum dolor sit amet, consectetur elit. Reprehendit provident nam officiis ex harum,
+                            dolor sit dicta mius fugit, debitis.
+                        </p>
+                    </div>
+                    <div class="blocIcon"><img src="assets/bed.png" alt="Faire le lit">Faire le lit
+                        <p>Lorem ipsum dolor sit amet, consectetur elit. Reprehendit provident nam officiis ex harum,
+                            dolor sit dicta mius fugit, debitis.
+                        </p>
+                    </div>
+                    <div class="blocIcon"><img src="assets/fire-symbol.png" alt="allumer le feu">allumer le feu
+                        <p>Lorem ipsum dolor sit amet, consectetur elit. Reprehendit provident nam officiis ex harum,
+                            dolor sit dicta mius fugit, debitis.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="main2Icons">
+                    <div class="blocIcon"><img src="assets/plant-leaf-with-white-details.png"
+                            alt="ramasser les feuilles">ramasser les
+                        feuilles
+                        <p>Lorem ipsum dolor sit amet, consectetur elit. Reprehendit provident nam officiis ex harum,
+                            dolor sit dicta mius fugit, debitis.
+                        </p>
+                    </div>
+                    <div class="blocIcon"><img src="assets/umbrella-black-silhouette.png"
+                            alt="Protéger de la pluie">Protéger de la pluie
+                        <p>Lorem ipsum dolor sit amet, consectetur elit. Reprehendit provident nam officiis ex harum,
+                            dolor sit dicta mius fugit, debitis.
+                        </p>
+                    </div>
+                    <div class="blocIcon"><img src="assets/dollar-symbol.png" alt="Vider votre compte">Vider votre
+                        compte
+                        <p>Lorem ipsum dolor sit amet, consectetur elit. Reprehendit provident nam officiis ex harum,
+                            dolor sit dicta mius fugit, debitis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- team.jpg.png -->
+        <div class="main3Backgroundimg">
+            <h2>La super équipe à l'origine de Super App</h2>
+        </div>
+        <div class="main4Team">
+            <div class="main4TeamAvatar"> <img src="assets/avaone.jpg.png" alt="tex Talign">tex Talign <br>
+                <!-- #DD5555 -->
+                <a href="#">
+                    <button>
+                        <img src="assets/envelope.png" alt="Lui-écrire"> Lui écrire
+                    </button>
+                </a>
+            </div>
+            <div class="main4TeamAvatar"> <img src="assets/avatwo.jpg.png" alt="Marge Inn">Marge Inn <br>
+                <a href="#">
+                    <button>
+                        <img src="assets/envelope.png" alt="Lui-écrire"> Lui écrire
+                    </button>
+                </a>
+            </div>
+            <div class="main4TeamAvatar"> <img src="assets/avathree.jpg.png" alt="Isaac Newton">Isaac Newton <br>
+                <a href="#">
+                    <button>
+                        <img src="assets/envelope.png" alt="Lui-écrire"> Lui écrire
+                    </button>
+                </a>
+            </div>
+            <div class="main4TeamAvatar"> <img src="assets/avafour.jpg.png" alt="Ash Tehemel">Ash Tehemel <br>
+                <a href="#">
+                    <button>
+                        <img src="assets/envelope.png" alt="Lui-écrire"> Lui écrire
+                    </button>
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <h2>ENVOYEZ-NOUS UN MESSAGE</h2>
+        <!-- manquera la page php de traitement des données, donnera résultat error -->
+        <div class="form">
+            <form method="post" action="traitement.php" class="footerForm">
+                <!-- NOM -->
+                <div class="formNomMail">
+                    <div class="form1nom">
+                        <label for="NOM">Votre nom</label>
+                        <input type="text" id="NOM" name="NOM">
+                    </div>
+                    <!-- Mail -->
+                    <div class="form1email">
+                        <label for="Mail">Votre e-mail</label>
+                        <input type="email" id="Mail" name="Mail">
+                    </div>
+                </div>
+                <!-- Message -->
+                <div class="formMessage">
+                    <label for="Message">Votre message</label>
+                    <textarea name="" id="Message" name="Message"></textarea>
+                </div>
+                <!-- Submit -->
+                <div class="send">
+                    <button type="submit" value="Envoyer">
+                        <img src="assets/paper-plane.png" alt="paper-plane">Envoyer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

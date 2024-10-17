@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSCRIPTION</title>
+    <!-- css - js -->
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/INSCRIPTION.css">
+    <script src="/script.js"></script>
+    <script src="/INSCRIPTION.JS"></script>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <div w3-include-html="/menu.html"></div>
+    </nav>
+
+    <h1>INSCRIPTION</h1>
+    <!-- FORMULAIRE INSCRIPTION -->
+    <h3>Vous avez une question ? Vous souhaitez vous inscrire ?</h1>
+        <h3>FORMULAIRE</h3>
+        <br>
+        <div class="Contactez-nous">
+
+            <h3 class="h3">Contactez-nous</h3>
+            <h4>N'hésitez pas à nous transmettre vos demandes, nous y répondrons dans les plus
+                brefs délais.</h4>
+            <form action="traitement-de-données" method="post">
+
+                <div>
+                    <label for="nom">Votre nom</label><br>
+                    <input type="text" id="nom" placeholder="Binguel" required>
+                </div>
+                <div>
+                    <label for="nom">Votre prénom</label><br>
+                    <input type="text" id="nom" placeholder="Corot" required>
+                </div>
+                <div>
+                    <label for="email">Votre e-mail</label><br>
+                    <input type="email" id="email" placeholder="monemail@gmail.com" required>
+                </div>
+                <div>
+                    <label for="nom">Téléphone</label><br>
+                    <input type="text" id="nom"
+                        placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- - - - - - - - - - - - -"
+                        required>
+                </div>
+
+                <div>
+                    <label for="sujet">Quel est le sujet de votre demande</label><br>
+                    <select name="sujet" id="sujet" required>
+                        <option value="" disabled select hidden>Choisissez le sujet de votre message</option>
+                        <option value="probleme-compte">Vous rencontrez un problème avec votre compte</option>
+                        <option value="question-ccours">Une question concernant les cours</option>
+                        <option value="devis">Vous souhaitez faire un devis ?</option>
+                        <option value="choix du cours">Choix du cours </option>
+                        <option value="autre">Autre...</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="message">Votre message</label><br>
+                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Bonjour, ..." maxlength="300"
+                        minlength="15"></textarea>
+                </div>
+                <!--Bouton-->
+                <div><button type="submit">Envoyer</button></div>
+            </form>
+        </div>
+        <br>
+        <p>Merci de rentrer une adresse e-mail valide.</p>
+
+        <p>Suite à votre inscription, nous vous recontacterons dans les meilleurs délais pour valider avec vous la date
+            de votre cours d'essai.</p>
+        <br><br>
+        <script>includeHTML();</script>
+
+</body>
+
+</html>

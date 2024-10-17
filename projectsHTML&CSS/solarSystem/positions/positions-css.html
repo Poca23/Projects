@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les positions en css</title>
+    <link rel="stylesheet" href="../positions/positions-css.css">
+</head>
+
+<body>
+
+    <h1>Les positions en css</h1>
+    <div id="container">
+        <div id="box_static">Static</div>
+        <div id="box_relative">Relative</div>
+        <div id="box_absolute">Absolute</div>
+        <div id="box_fixed">Fixed</div>
+        <div id="box_sticky">Sticky</div>
+
+        <div id="text">
+            <p>Static : L'élément static reste à la même place qu'initial et reste dans le flux si pas de données.
+                Position par défaut.</p>
+            <p>Absolute : L'élément se déplace par rapport à la page et sort du transit <br> en passant par-dessus ce
+                dernier.</p>
+            <p>Relative : L'élément se place à la suite et reste dans le transit.</p>
+            <p>Fixed : L'élément reste fixé dans la page à son emplacement donnée en sortant du flux. Il n'est pas
+                sensible au scroll.</p>
+            <p>Sticky : L'élément reste à sa place sans instructions données. Si instructions données, se déplacera en
+                fonction des données avec le scroll. Reste dans le flux.</p>
+        </div>
+    </div>
+    <h4>! L'ordre et la parenté sont la base du css, bien vérifier la hiérarchisation des
+        éléments !</h4>
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+/* Les positions en css */
+
+body {
+  background-color: black; /*Pour une meilleure visibilté*/
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+/* Container */
+#container {
+  display: flex;
+  /*Pour qu'on puisse voir les éléments entièrement, 
+    et pas les uns en-dessous des autres*/
+  flex-wrap: wrap;
+  /*flex-wrap permet de s'adapter à la taille de la fenêtre, 
+    de sauter de ligne ou de s'aligner en fonctions de la place*/
+  border: red solid 1px;
+  height: 200px;
+  margin: 10px; /*Pour que les boîtes soient éloignées de 10px entre elles*/
+  font-size: 1rem; /*rem s'adaptera à la taille de police du support d'affichage*/
+  font-weight: bold;
+  /*display justify-content, 
+    align-items sont là pour centrer le contenu des boîtes*/
+  font-family: cursive;
+}
+
+/* Static */
+#box_static {
+  position: Static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  background-color: chocolate;
+  border: rgb(211, 218, 218) solid 2px;
+  border-radius: 20%;
+  font-size: 1rem; /*rem s'adaptera à la taille de police du support d'affichage*/
+}
+/* Absolute */
+#box_absolute {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  background-color: rgb(30, 63, 210);
+  border: rgb(211, 218, 218) solid 2px;
+  border-radius: 20%;
+  font-size: 0.85rem; /*rem s'adaptera à la taille de police du support d'affichage*/
+  margin-left: 40px;
+  margin-top: 40px;
+}
+/* Relative */
+#box_relative {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  background-color: rgb(9, 140, 11);
+  border: rgb(211, 218, 218) solid 2px;
+  border-radius: 20%;
+  font-size: 0.85rem; /*rem s'adaptera à la taille de police du support d'affichage*/
+}
+/* Fixed */
+#box_fixed {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  background-color: rgb(150, 13, 143);
+  border: rgb(211, 218, 218) solid 2px;
+  border-radius: 20%;
+  font-size: 0.85rem; /*rem s'adaptera à la taille de police du support d'affichage*/
+  margin-top: 80px;
+}
+/* Sticky */
+#box_sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  background-color: rgb(176, 214, 40);
+  border: rgb(211, 218, 218) solid 2px;
+  border-radius: 20%;
+  font-size: 0.85rem; /*rem s'adaptera à la taille de police du support d'affichage*/
+  margin-left: 20px;
+}
+/* Text */
+#text {
+  margin-top: -80px;
+  margin-left: 280px;
+  margin-right: 100px;
+  color: white;
+  font-size: 0.7rem;
+  justify-content: right;
+  text-align: justify;
+}
+h4 {
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+}

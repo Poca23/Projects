@@ -1,0 +1,215 @@
+/* --Navbar responsive déroulant-- */
+/* -------------------------------------------------------------------------------- */
+
+/* Un menu responsive est un menu qui s'adapte à la taille de tous les écrans */
+/* Méthode à base de cases à cocher invisible */
+
+/* -------------------------------------------------------------------------------- */
+/* On va commencer par mettre en forme le premier niveau de notre menu  */
+
+/*-On va effectuer un reset css sur note élément body et sur notre menu(ul),
+car certains navigateurs peuvent enlever des marges automatiquement,
+on applique une font différente pour notre page */
+body {
+  background-image: url(assets/hôtel.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "ojuju", calibri, sans serif;
+  margin: 0;
+  padding: 0;
+}
+
+/*On va commencer par étirer notre élément nav,
+ pour qu'il prenne toute la largeur disponible dans la page, 
+ et lui donner une couleur de fond
+ On lui donnera une width de 100% de son élément parent, le body
+ */
+.titre {
+  color: rgba(255, 255, 255, 0.767);
+  text-align: center;
+  font-style: italic;
+  font-family: "style script", sans serif;
+}
+
+nav {
+  width: 100%;
+  background-color: rgba(61, 168, 168, 0.377);
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+nav > ul {
+  /*on ne cible que l'élément ul(1er niveau de menu)enfant direct du parent nav*/
+  margin: 0;
+  padding: 0;
+}
+nav li {
+  /*-On enlève les puces automatiquement affichées par le navigateur, 
+    on ne cible que les éléments li à l'intérieur de notre élément nav*/
+  list-style-type: none;
+  color: white;
+}
+nav > ul > li {
+  /*On utilisera la propriété float pour faire flotter les élément côte à côte,
+    on appliquera donc un float : left seulement aux éléments li qui appartiennent à
+    notre liste principale, on ne cible donc que les li enfants direct de la liste ul,
+    elle même enfant direct de l'élément parent nav */
+  float: left;
+  /* On va attribuer une position relative aux éléments de notre menu principal,
+    car ça sera utile pour bien positionner nos sous-éléments, nos sous-onglets de menu */
+  position: relative;
+}
+
+nav > ul::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.sous-menu {
+  /* On va vouloir aussi cacher nos sous-menus avec un display : none,
+     tant qu'un utilisateur n'a passe pas sa souris sur l'onglet correspondant, 
+     on ciblera l'élément sous-menu par sa class */
+  display: none;
+}
+
+nav input[type="checkbox"] {
+  display: none;
+}
+
+nav label {
+  display: none;
+}
+
+nav a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+nav > ul > li > a {
+  padding: 20px 30px;
+  background-color: rgba(61, 168, 168, 0.149);
+  color: white;
+}
+
+/* --------------------------------------------------------------------------------- */
+nav > ul > li:hover a {
+  padding: 15px 30px 20px 30px;
+}
+
+nav li:hover .sous-menu {
+  display: inline-block;
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  padding: 0px;
+  z-index: 1000;
+}
+
+.sous-menu li a {
+  padding: 15px 30px;
+  font-size: 13px;
+  color: white;
+  width: 270px;
+}
+
+.sous-menu li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+  border-left: 0.1px solid rgba(0, 0, 0, 0.185);
+  border-right: 0.1px solid rgba(0, 0, 0, 0.185);
+}
+
+.menu-plage:hover {
+  border-top: 3px solid rgba(255, 255, 0, 0.52);
+  background-color: rgba(255, 255, 0, 0.15);
+}
+.menu-mer:hover {
+  border-top: 3px solid rgba(0, 183, 255, 0.52);
+  background-color: rgba(251, 254, 255, 0.15);
+}
+.menu-hôtel:hover {
+  border-top: 3px solid rgba(255, 0, 162, 0.52);
+  background-color: rgba(255, 0, 162, 0.15);
+}
+.menu-promenade:hover {
+  border-top: 3px solid rgba(13, 182, 38, 0.52);
+  background-color: rgba(13, 182, 38, 0.15);
+}
+.menu-témoignages:hover {
+  border-top: 3px solid rgba(252, 252, 252, 0.52);
+  background-color: rgba(252, 252, 252, 0.15);
+}
+
+.menu-plage .sous-menu {
+  background-color: rgba(255, 255, 0, 0.168);
+}
+.menu-mer .sous-menu {
+  background-color: rgba(5, 184, 255, 0.168);
+}
+.menu-hôtel .sous-menu {
+  background-color: rgba(255, 0, 162, 0.168);
+}
+.menu-promenade .sous-menu {
+  background-color: rgba(16, 227, 47, 0.168);
+}
+
+.sous-menu li:hover a {
+  color: black;
+  font-weight: 700;
+}
+
+.menu-plage .sous-menu li:hover {
+  background-color: rgba(22, 21, 21, 0.247);
+  box-shadow: 0px 0px 5px whitesmoke;
+}
+.menu-mer .sous-menu li:hover {
+  background-color: rgba(22, 21, 21, 0.247);
+  box-shadow: 0px 0px 5px whitesmoke;
+}
+.menu-hôtel .sous-menu li:hover {
+  background-color: rgba(22, 21, 21, 0.247);
+  box-shadow: 0px 0px 5px whitesmoke;
+}
+.menu-promenade .sous-menu li:hover {
+  background-color: rgba(22, 21, 21, 0.247);
+  box-shadow: 0px 0px 5px whitesmoke;
+}
+/* --------------------------------------------------------------------------------- */
+
+nav input[type="checkbox"]:checked ~ ul {
+  display: block;
+}
+
+@media screen and (max-width: 780px) {
+  .menu-mobile {
+    display: block;
+    color: rgb(255, 255, 255);
+    background-color: rgba(61, 168, 168, 0.225);
+    text-align: center;
+    padding: 12px 0px;
+  }
+  nav ul {
+    display: none;
+  }
+  nav ul li,
+  nav ul li a {
+    width: 100%;
+    text-align: center;
+    color: white;
+    transition: 0.5s;
+  }
+  nav ul li a,
+  nav ul li:hover a {
+    padding: 10px 0px;
+    transition: 1.5s;
+  }
+  nav li:hover .sous-menu {
+    display: block;
+    position: static;
+  }
+}

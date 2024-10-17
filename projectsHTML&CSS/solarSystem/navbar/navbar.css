@@ -1,0 +1,52 @@
+/* Navbar */
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+}
+
+/* Nav */
+nav {
+  background-color: bisque;
+  border-bottom: rgb(201, 126, 13) solid 3px;
+  height: 50px;
+  width: 100%; /*Pour que la nav prenne toute la largeur de sa ligne sur la fenêtre*/
+  position: sticky;
+  top: 0px;
+}
+/* h1 */
+h1 {
+  text-align: center;
+  color: brown;
+}
+/* ul */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; /*Pour enlever les puces des listes*/
+  display: flex; /*Pour que tout soit bien écarté et centrer comme il faut*/
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+/* a */
+a {
+  text-decoration: none;
+  color: black;
+}
+/* p */
+p {
+  color: white;
+}
+/* I je veux que ma barre de navigation soit toujours fixée en haut je dois utiliser soit
+ fixed soit sticky */
+
+/* Essayons avec la propriété fixed
+ -On rajoute donc une position fixed à mon menu;
+ -On remarque que l'élément fixed va faire sortir l'élément du flux, 
+ qui va donc passer par-dessus les autres éléments et cacher le titre.
+ -Une solution, mettre un margin pour décaler mon titre de la navbar qui le cache.
+ 
+ MAIS,
+ L'autre solution est d'avoir une postion sticky sur la navbar.
+ */

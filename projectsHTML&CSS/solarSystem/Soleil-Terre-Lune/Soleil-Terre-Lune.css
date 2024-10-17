@@ -1,0 +1,242 @@
+/* Sun-Earth-Moon */
+/* En-tête */
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  display: block;
+}
+body {
+  text-align: center;
+  font-family: "Itim", cursive;
+  color: rgba(75, 148, 231, 0.668);
+  background-color: #02080d;
+  background-image: url(Space.jpg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+#Informations {
+  position: relative;
+  display: block;
+  text-align: center;
+  text-shadow: 2px 2px #03102a;
+}
+#sub-title {
+  font-family: "Dawning of a New Day", cursive;
+  font-size: 14px;
+  font-weight: bolder;
+  font-style: italic;
+  color: rgba(254, 255, 255, 0.426);
+}
+/* Système Solaire
+-------------------------------------------------------------- */
+#systeme_solaire {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orbite {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: 0.5s;
+  z-index: 0;
+}
+/* Soleil
+-------------------------------------------------------------- */
+#soleil {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-image: url(Solar.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: drop-shadow(1px 1px 30px red);
+  margin-top: 130px;
+  margin-left: 450px;
+}
+/* Terre
+-------------------------------------------------------------- */
+#terre {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  margin-top: 55px;
+  margin-left: 375px;
+}
+#planete_terre {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-image: url(Earth.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-animation: orbite_terre 12s linear infinite;
+  animation: orbite_terre 12s linear infinite;
+  box-shadow: inset 0 3px 1px rgba(0, 0, 0, 0.4);
+  margin-top: 120px;
+  margin-left: 120px;
+}
+@-webkit-keyframes orbite_terre {
+  from {
+    -webkit-transform: rotate(180deg) translateY(-125px);
+  }
+
+  to {
+    -webkit-transform: rotate(-180deg) translateY(-125px);
+  }
+}
+@keyframes orbite_terre {
+  from {
+    transform: rotate(180deg) translateY(-125px);
+  }
+
+  to {
+    transform: rotate(-180deg) translateY(-125px);
+  }
+}
+@-moz-keyframes orbite_terre {
+  from {
+    -moz-transform: rotate(180deg) translateY(-125px);
+  }
+
+  to {
+    -moz-transform: rotate(-180deg) translateY(-125px);
+  }
+}
+/* Lune
+-------------------------------------------------------------- */
+#lune {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-top: -6px;
+  margin-left: -6px;
+}
+#astre_lune {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-image: url(Moon.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-animation: orbite_lune 1s linear infinite;
+  animation: orbite_lune 1s linear infinite;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.4);
+  margin-top: 8px;
+  margin-left: 8px;
+}
+@-webkit-keyframes orbite_lune {
+  from {
+    -webkit-transform: rotate(-180deg) translateY(-11px);
+  }
+  to {
+    -webkit-transform: rotate(180deg) translateY(-11px);
+  }
+}
+@keyframes orbite_lune {
+  from {
+    transform: rotate(-180deg) translateY(-11px);
+  }
+
+  to {
+    transform: rotate(180deg) translateY(-11px);
+  }
+}
+@-moz-keyframes orbite_lune {
+  from {
+    -moz-transform: rotate(-180deg) translateY(-11px);
+  }
+
+  to {
+    -moz-transform: rotate(180deg) translateY(-11px);
+  }
+}
+/* Informations Planètes
+-------------------------------------------------------------- */
+.titre_info {
+  position: absolute;
+  cursor: pointer;
+  font-size: 15px;
+  color: #386077;
+  transition: 0.5s;
+}
+.titre_info:hover {
+  color: rgb(239, 238, 172);
+  text-shadow: 0px 0px 10px mistyrose;
+  font-size: 22px;
+  transition: 0.5s;
+}
+/* Info Planète */
+#info_terre {
+  position: absolute;
+  margin-top: 50px;
+  margin-left: 50px;
+}
+/* Info Astre */
+#info_soleil {
+  position: absolute;
+  margin-top: 70px;
+  margin-left: 50px;
+}
+#info_lune {
+  position: absolute;
+  margin-top: 90px;
+  margin-left: 50px;
+}
+/* Info Planète */
+#info_terre:hover~#terre.orbite,
+/* Info Astre */
+#info_lune:hover~#terre #planete_terre #lune.orbite {
+  border: 1px solid rgb(215, 190, 48);
+  transition: 0.5s;
+}
+#info_soleil:hover ~ #soleil {
+  height: 110px;
+  width: 110px;
+  margin-top: 135px;
+  margin-left: 450px;
+  transition: 0.5s;
+}
+/* Cadres Informations Planètes
+-------------------------------------------------------------- */
+/* Cadre Planète */
+#cadre_terre,
+/* Cadre Astre */
+#cadre_soleil,
+#cadre_lune,
+/* Info Planète */
+#info_terre:hover~#cadre_terre,
+/* Info Astre */
+#info_soleil:hover~#cadre_soleil,
+#info_lune:hover~#cadre_lune,
+/* Position */
+#position {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  margin: auto;
+  text-decoration: underline;
+  color: black;
+  text-shadow: 1px 1px white;
+  z-index: -1;
+}
+#Galaxy-position-system-solar {
+  width: 350px;
+  height: 350px;
+  border: 0px 0px 5px solid rgba(241, 240, 236, 0.095);
+  border-radius: 50%;
+  filter: drop-shadow(0px 0px 13px rgb(240, 236, 236));
+  margin-top: 400px;
+  padding-bottom: 20px;
+}

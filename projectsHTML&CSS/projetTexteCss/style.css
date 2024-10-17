@@ -1,0 +1,52 @@
+/*  On mettra en forme le texte rattaché à ce fichier CSS  */
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+body {
+  margin: auto 2%;
+  width: 95%;
+  height: 100%;
+  background-image: url(ai-generated-8015883_1920.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+  font-size: 34px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+h4 {
+  text-decoration: underline;
+  font-size: 20px;
+  font-style: italic;
+}
+
+h6 {
+  font-size: 23px;
+  font-family: fantasy;
+  font-weight: lighter;
+}
+
+.blocp {
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0.316);
+}
+
+p {
+  margin: 1%;
+  width: 100%;
+  text-align: left;
+}

@@ -11,6 +11,7 @@
 /* BODY */
 body {
   height: 100%;
+  margin: auto;
 }
 
 /* NAVBAR */
@@ -126,7 +127,7 @@ body {
 }
 
 .produits .carte img {
-  height: 250px;
+  height: 280px;
   width: 100%;
   border-radius: 10px;
 }
@@ -170,6 +171,13 @@ body {
   background-color: rgb(37, 37, 37);
 }
 
+.produits .carte .box .btnAcheter:active {
+  cursor: pointer;
+  color: rgb(37, 37, 37);
+  background-color: #f1f1f1;
+  box-shadow: 1px 1px 1px crimson;
+}
+
 /* FOOTER */
 footer {
   background: rgb(37, 37, 37);
@@ -179,6 +187,9 @@ footer {
 footer .copyrights {
   text-align: center;
   line-height: 10vh;
+  font-family: "Open sans", sans-serif;
+  font-size: 15px;
+  font-style: italic;
   color: rgb(226, 226, 226);
 }
 

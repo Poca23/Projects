@@ -1,0 +1,205 @@
+/* RESET */
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-position: center;
+  background-size: cover;
+  width: 90%;
+  margin: auto;
+  padding: 3%;
+}
+/* balise game_infos */
+.game_infos {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Container */
+.container {
+  height: 300px;
+  width: 500px;
+  border: 1px solid silver;
+  cursor: pointer;
+  position: relative;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Target */
+#target {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  transition: 0.25;
+  animation: animateTarget 10s infinite;
+}
+
+button {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: rgb(151, 151, 151);
+  color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Keyframes */
+@keyframes animateTarget {
+  to {
+    transform: translateY(-200px) rotate(90deg);
+  }
+}
+
+/* Typographie */
+h1 {
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 2em;
+  text-align: center;
+  color: brown;
+  padding: 5%;
+  border: 1px solid;
+}
+
+small {
+  font-style: italic;
+}
+
+h2 {
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 1.3em;
+  text-align: center;
+  color: cadetblue;
+  text-decoration: none;
+  padding: 3%;
+}
+
+h3 {
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 1.1em;
+  text-align: left;
+  color: rgb(160, 111, 95);
+  text-decoration: underline;
+  padding: 3%;
+}
+
+h4 {
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 0.9em;
+  text-align: left;
+  color: rgb(139, 95, 160);
+  text-decoration: underline;
+  padding: 3%;
+}
+
+p {
+  font-family: "Open sans", sans-serif;
+  font-size: 0.8em;
+  text-align: justify;
+  padding-left: 2%;
+  padding-right: 2%;
+  color: rgb(69, 69, 69);
+}
+
+ul {
+  text-align: justify;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+li {
+  font-family: "Open sans", sans-serif;
+  font-size: 0.8em;
+  text-align: justify;
+  padding-left: 2%;
+  padding-right: 2%;
+  color: rgb(69, 69, 69);
+}
+
+a {
+  text-decoration: none;
+  font-family: "Open sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.9em;
+  text-align: justify;
+  padding-left: 2%;
+  padding-right: 2%;
+  color: rgb(69, 69, 69);
+}
+
+a:hover {
+  color: brown;
+  text-decoration: underline;
+}
+
+hr {
+  margin: 1%;
+  padding: 0.5%;
+  background-color: cadetblue;
+}
+
+strong {
+  color: rgb(81, 81, 81);
+}
+
+strong:hover {
+  font-size: 0.96em;
+  font-weight: 800;
+}
+
+img {
+  margin: auto 10% 10% 100% 10%;
+  width: 80%;
+  height: auto;
+  display: flex;
+  margin: 5%;
+}
+
+img:hover {
+  margin: auto 10% 10% 100% 10%;
+  width: 100%;
+  height: auto;
+  /* z-index: 10; */
+  background-color: rgba(255, 255, 255, 0.59);
+}
+
+/* Media screen */
+
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+  /* Desktops, large screens */
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Small screens, laptops */
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  /* iPads, Tablets */
+}
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  /* Mobile devices */
+}
+
+/* Sur les écrans, quand la largeur de la fenêtre fait au maximum 1280px */
+@media screen and (max-width: 1280px) {
+} /* Sur tous types d'écran,
+  quand la largeur de la fenêtre est comprise entre 1024px et 1280px */
+@media all and (min-width: 400px) and (max-width: 500px) {
+} /* Sur tous types d'écrans orientés verticalement */
+@media all and (orientation: portrait) {
+}

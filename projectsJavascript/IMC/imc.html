@@ -7,17 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calcul et interprétation de l'IMC</title>
     <link rel="stylesheet" href="imc.css">
-    <script src="imcs.js"></script>
+    <script src="imc.js"></script>
 </head>
 
 <body>
 
     <h1>Calcul et interprétation de l'IMC</h1>
 
+    <h2>Veuillez saisir la masse (en kg), et la taille (en m) de l'individu :
+    </h2>
+    <p>Masse : <input type="number" id="inputMasse" value=75></p>
+    <p>Taille : <input type="number" id="inputTaille" value=1.58></p>
 
-
-
-
+    <button onclick="calculDeLimc()">Cliquez ici pour calculer l'IMC</button>
+    <p id="resultats"></p>
+    <p id="interpretation"></p>
 </body>
 
 </html>

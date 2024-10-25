@@ -16,12 +16,19 @@
 
     <h2>Veuillez saisir la masse (en kg), et la taille (en m) de l'individu :
     </h2>
-    <p>Masse : <input type="number" id="inputMasse" value=75></p>
-    <p>Taille : <input type="number" id="inputTaille" value=1.58></p>
+    <div class="container">
 
-    <button onclick="calculDeLimc()">Cliquez ici pour calculer l'IMC</button>
-    <p id="resultats"></p>
-    <p id="interpretation"></p>
+        <div class="input">
+            <p>Masse<input type="number" id="inputMasse" value=58></p>
+            <p>Taille<input type="number" id="inputTaille" value=1.58></p>
+        </div>
+
+        <div class="infos">
+            <button onclick="calculDeLimc()">Cliquez ici pour calculer l'IMC</button>
+            <p id="resultats"></p>
+            <p id="interpretation"></p>
+        </div>
+    </div>
 </body>
 
 </html>

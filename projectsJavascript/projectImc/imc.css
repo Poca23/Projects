@@ -12,6 +12,53 @@ body {
   margin: auto;
   padding: 3%;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 3%;
+  border: none;
+  border-radius: 2%;
+  padding: 15px;
+  margin: auto;
+}
+
+.input p {
+  text-align: center;
+  margin: auto 10%;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.input #inputMasse {
+  text-align: center;
+  padding: 10% 1%;
+  font-size: 15px;
+  font-weight: 600;
+}
+.input #inputTaille {
+  text-align: center;
+  padding: 10% 1%;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.infos {
+  justify-content: center;
+  align-items: center;
+  margin: 2%;
+}
+
 h1 {
   font-family: "Roboto Slab", sans-serif;
   font-size: 2em;

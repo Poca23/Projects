@@ -15,6 +15,7 @@ body {
   --color-primary: #f76c5e;
   --color-secondary: #f68e5f;
   --color-tertiary: #ffeee6;
+  background-color: #eeeeee;
 }
 
 /* Mise en forme des titres */
@@ -75,7 +76,7 @@ button {
   font-weight: 600;
   font-size: 17px;
   color: brown;
-  background-color: white;
+  background-color: #f1f1f1;
 }
 
 button:hover {
@@ -118,11 +119,11 @@ main {
   margin-bottom: 50px;
   padding: 50px;
   text-align: center;
-  color: white;
+  color: #f1f1f1;
   font-size: 17px;
   font-weight: 500;
   border-radius: 30px;
-  background-color: brown;
+  background-color: rgb(70, 132, 90);
 }
 
 footer {
@@ -134,7 +135,7 @@ footer {
   padding: px;
   font-weight: 600;
   font-size: 15px;
-  color: white;
+  color: #f1f1f1;
   background-color: brown;
 }
 
@@ -160,7 +161,7 @@ footer {
   margin: 10px 0 10px 0;
   padding: 20px;
   border-radius: 20px;
-  background-color: white;
+  background-color: #f1f1f1;
   font-size: 30px;
   font-weight: 600;
   color: brown;

@@ -26,11 +26,10 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin: 3%;
+  margin: auto 1%;
   border: none;
   border-radius: 2%;
   padding: 15px;
-  margin: auto;
 }
 
 .input p {
@@ -56,7 +55,36 @@ body {
 .infos {
   justify-content: center;
   align-items: center;
-  margin: 2%;
+  margin: 1%;
+}
+
+.btn_Calcul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: "Open sans", sans-serif;
+  font-weight: 600;
+  margin-bottom: 2%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#resultats,
+#interpretation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 15px;
+  font-family: "Open sans", sans-serif;
+  font-weight: 600;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h1 {

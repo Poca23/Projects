@@ -18,6 +18,11 @@ body {
   margin: auto;
   padding: 3%;
 }
+
+.game {
+  margin: auto 10%;
+}
+
 /* balise game_infos */
 .game_infos {
   display: flex;
@@ -51,14 +56,28 @@ body {
   animation: animateTarget 10s infinite;
 }
 
+.start_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 button {
-  padding: 10px 20px;
-  margin-bottom: 20px;
-  background-color: rgb(151, 151, 151);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: cadetblue;
   color: #f1f1f1;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  box-shadow: 0 0 10px black;
+  margin: 5%;
+  font-size: 20px;
 }
 
 /* Keyframes */
@@ -74,7 +93,7 @@ h1 {
   font-size: 2em;
   text-align: center;
   color: brown;
-  padding: 5%;
+  padding: 2%;
   border: 1px solid;
 }
 
@@ -88,16 +107,27 @@ h2 {
   text-align: center;
   color: cadetblue;
   text-decoration: none;
-  padding: 3%;
+  padding: 1%;
 }
 
+.instructions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #d0d0d0;
+  background-color: rgb(137, 137, 137);
+  border-radius: 5px;
+  padding: 2% 1%;
+  box-shadow: 0 0 10px black;
+}
 h3 {
   font-family: "Roboto Slab", sans-serif;
   font-size: 1.1em;
-  text-align: left;
-  color: rgb(160, 111, 95);
-  text-decoration: underline;
-  padding: 3%;
+  text-align: center;
+  color: #f1f1f1;
+  text-decoration: none;
+  padding: 1%;
 }
 
 h4 {
@@ -111,7 +141,7 @@ h4 {
 
 p {
   font-family: "Open sans", sans-serif;
-  font-size: 0.8em;
+  font-size: 1em;
   text-align: justify;
   padding-left: 2%;
   padding-right: 2%;
@@ -166,18 +196,19 @@ strong:hover {
 
 img {
   margin: auto 10% 10% 100% 10%;
-  width: 80%;
+  width: 100%;
   height: auto;
   display: flex;
-  margin: 5%;
+  margin: auto;
 }
 
 img:hover {
-  margin: auto 10% 10% 100% 10%;
+  margin: auto;
   width: 100%;
   height: auto;
-  /* z-index: 10; */
-  background-color: rgba(255, 255, 255, 0.59);
+  z-index: 10;
+  background-color: rgba(168, 19, 19, 0.59);
+  border-radius: 25%;
 }
 
 /* Media screen */

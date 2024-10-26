@@ -9,7 +9,7 @@ let timeContainer = document.querySelector(" .time");
 
 btn.onclick = function () {
   let score = 0;
-  let time = 10;
+  let time = 20;
   container.innerHTML = "";
 
   let interval = setInterval(function showTarget() {
@@ -24,7 +24,7 @@ btn.onclick = function () {
     // faire disparaitre la cible
     setTimeout(function () {
       target.remove();
-    }, 1300);
+    }, 1000);
 
     //   Clique sur target
     target.onclick = function () {
@@ -42,5 +42,5 @@ btn.onclick = function () {
       clearInterval(interval);
       container.innerHTML = "Fini ! Alors, ça donne quoi champion ?";
     }
-  }, 700);
+  }, 1800);
 };

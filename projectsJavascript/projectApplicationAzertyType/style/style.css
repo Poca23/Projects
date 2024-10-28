@@ -1,6 +1,8 @@
-/**
- * Reset
- */
+/* /////////////////////////////// */
+/* Application AzerType */
+/* /////////////////////////////// */
+
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -123,7 +125,7 @@ main {
   font-size: 17px;
   font-weight: 500;
   border-radius: 30px;
-  background-color: rgb(70, 132, 90);
+  background-color: rgb(41, 144, 74);
 }
 
 footer {

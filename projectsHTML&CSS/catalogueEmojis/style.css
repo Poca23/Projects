@@ -1,0 +1,189 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: cadetblue;
+}
+
+body {
+  margin: auto 2%;
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  margin: 1%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.logo {
+  width: 30%;
+  height: 100%;
+  padding: 1%;
+}
+.titre {
+  width: 70%;
+  height: 100%;
+  padding: 1%;
+}
+
+h3 {
+  text-align: left;
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 25px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  margin: 2%;
+}
+.sommaire {
+  background-color: rgb(68, 68, 68);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.sommaire > ul {
+  width: 100%;
+  height: auto;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: top;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.sommaire > ul > .group {
+  margin-top: 0px;
+  width: 150px;
+  height: auto;
+  margin: 1%;
+  padding: 1%;
+  background-color: #f1f1f1;
+  border-right: 1px ridge black;
+  border-left: 1px ridge black;
+}
+
+.sommaire > ul > .group > h4 {
+  margin-top: 0%;
+  border: 1px solid;
+  text-align: center;
+  background-color: rgb(68, 68, 68);
+}
+
+.sommaire > ul > .group > h4 > a {
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+.sommaire > ul > .group > .listGroup {
+  padding: 5%;
+}
+.sommaire > ul > .group > .listGroup > li {
+  margin: 2%;
+}
+
+.theme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 1%;
+}
+
+.array {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 1%;
+}
+
+table {
+  margin: auto 5px 10px;
+  width: 550px;
+  height: auto;
+  text-align: center;
+}
+
+table,
+tr,
+td,
+th {
+  border: 2px ridge;
+  border-collapse: collapse;
+  padding: 5% 2% 5% 2%;
+}
+
+caption {
+  text-align: center;
+  border: 5px ridge;
+  border-bottom: none;
+  border-collapse: collapse;
+  padding: 5% 2% 5% 2%;
+  background-color: rgb(68, 68, 68);
+  color: #f1f1f1;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 35px;
+  letter-spacing: 1px;
+  margin: 2%;
+}
+
+h2 {
+  text-align: center;
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+footer {
+  width: 100%;
+  height: 100px;
+  margin: 1%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.contact {
+  width: 30%;
+  height: auto;
+}
+
+.navigation {
+  width: 40%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.liens {
+  width: 30%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}

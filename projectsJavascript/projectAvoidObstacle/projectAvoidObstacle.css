@@ -1,0 +1,125 @@
+/* projectAvoidObstacle */
+/* RESET */
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgb(11, 11, 11) 0%, rgb(55, 55, 55) 25%);
+  flex-direction: column;
+}
+
+section {
+  background: linear-gradient(
+    to right,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 121, 77, 1) 35%
+  );
+  padding: 6px;
+  border-radius: 6px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.jeu {
+  width: 700px;
+  height: 400px;
+  border: 10px solid #000;
+  border-radius: 15px;
+  overflow: hidden;
+  background: linear-gradient(0deg, rgb(54, 54, 54) 0%, rgb(241, 241, 241) 5%);
+  border-bottom: 1px solid rgb(9, 121, 77);
+}
+
+.perso {
+  width: 10px;
+  height: 50px;
+  left: 10px;
+  border-radius: 6px;
+  background-color: rgba(2, 0, 36, 1);
+  position: relative;
+  top: 320px;
+}
+
+.animation {
+  animation: perso-saut 500ms infinite;
+}
+
+/* animation personnage saute */
+@keyframes perso-saut {
+  0% {
+    top: 130px;
+  }
+  25% {
+    top: 80px;
+  }
+  50% {
+    top: 80px;
+  }
+  100% {
+    top: 130px;
+  }
+}
+
+.perso img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.obstacles {
+  width: 20px;
+  height: 20px;
+  background-color: #000000;
+  position: relative;
+  top: 300px;
+  left: 650px;
+  border-radius: 50%;
+  animation: anime-obstacles 2.5s infinite;
+}
+
+/* animation obstacles */
+@keyframes anime-obstacles {
+  0% {
+    left: 655px;
+  }
+  100% {
+    left: -50px;
+  }
+}
+
+.control {
+  margin-top: 20px;
+  text-align: center;
+}
+
+a,
+button {
+  padding: 20px 60px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 0px 0px 25px rgba(208, 208, 208, 0.5);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 25px;
+  text-decoration: 0;
+  background: linear-gradient(180deg, hsl(140, 100%, 61%), hsl(237, 20%, 4%));
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: transparent;
+  -webkit-text-fill-color: linear-gradient(
+    180deg,
+    hsl(140, 100%, 61%),
+    hsl(237, 20%, 4%)
+  );
+}

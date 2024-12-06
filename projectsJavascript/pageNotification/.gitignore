@@ -1,0 +1,29 @@
+.DS_Store
+
+# N'importe quel fichier portant le nom `.env`, y compris dans les sous-répertoires
+.env
+
+# Tous les fichiers ayant l'extension `.tmp`
+*.tmp
+
+# Si je veux restreindre au répertoire courant
+/config.sample
+
+# Le répertoire `tmp` et tout ce qu'il peut contenir
+/tmp
+
+# On autorise une exception dans le répertoire de logs, le fichier `.keep`
+# pour ça on doit autoriser le répertoire
+!/logs
+
+# En revanche on n'autorise pas les fichiers qu'il contient,
+# ni les sous-répertoires
+/log/*
+
+# ...à l'exception du fichier `.keep`
+!/log/.keep
+
+/screen
+link-miro.txt
+README.md
+style-guide.md

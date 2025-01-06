@@ -1,24 +1,6 @@
-Page d'Accueil
------------------------------------------------------
-|                     Logo                          |
------------------------------------------------------
-| Rechercher une recette...                        [🔍] |
------------------------------------------------------
-| [Catégories] [Favoris] [Nouvelles Recettes]        |
------------------------------------------------------
-| Recettes Populaires                               |
-| - Recette 1                                       |
-| - Recette 2                                       |
-| - Recette 3                                       |
------------------------------------------------------
-| Suggestions du jour                               |
-| - Recette A                                       |
-| - Recette B                                       |
-| - Recette C                                       |
------------------------------------------------------
+Maquette Application de Livre de Recettes
 
-ok, vous pouvez me proposer une maquette de ça svp ?
-Pour vous donner une idée visuelle de l'application, voici une proposition de maquette (en format texte) pour les principales pages de votre application de livre de recettes :
+
 
 Page d'Accueil
 -----------------------------------------------------
@@ -42,39 +24,6 @@ Page d'Accueil
 | - Recette C                                       |
 -----------------------------------------------------
 
-
-
-Page de Détail de la Recette
------------------------------------------------------
-| [Retour] [Modifier] [Supprimer] [Ajouter aux Favoris] |
------------------------------------------------------
-|               [Image de la Recette]                |
------------------------------------------------------
-| Titre de la Recette                                |
-| -------------------------------------------------- |
-| Ingrédients                                        |
-| - Ingrédient 1                                     |
-| - Ingrédient 2                                     |
-| - Ingrédient 3                                     |
-| -------------------------------------------------- |
-| Instructions                                       |
-| 1. Étape 1                                         |
-| 2. Étape 2                                         |
-| 3. Étape 3                                         |
-| -------------------------------------------------- |
-| Vidéo                                              |
-| [Vidéo de la Recette - YouTube/Vidéo intégrée]     |
-| -------------------------------------------------- |
-| Partage                                            |
-| [Partager sur Facebook] [Partager sur Twitter] [Email]|
-| -------------------------------------------------- |
-| Commentaires                                       |
-| - [Nom Utilisateur] : Commentaire                  |
-| - [Nom Utilisateur] : Commentaire                  |
-| [+ Ajouter Commentaire]                            |
-| -------------------------------------------------- |
-| Likes [❤️ 10]                                      |
------------------------------------------------------
 
 
 
@@ -110,7 +59,6 @@ Page d'Édition de la Recette
 
 
 
-
 Page de Paramètres (Mode Light/Dark, Modèles de Mise en Page)
 -----------------------------------------------------
 | [Retour]                                           |
@@ -124,6 +72,9 @@ Page de Paramètres (Mode Light/Dark, Modèles de Mise en Page)
 | - Modèle 2 [○]                                     |
 | - Modèle 3 [○]                                     |
 -----------------------------------------------------
+
+
+
 
 
 Page de Création de Recette

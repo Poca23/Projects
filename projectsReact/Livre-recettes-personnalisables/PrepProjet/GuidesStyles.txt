@@ -1,0 +1,209 @@
+Couleurs qui évoquent la fraîcheur, la gourmandise et la convivialité. Voici quelques palettes de couleurs tendance pour la cuisine en 2024 et 2025 qui pourraient également être adaptées pour votre application :
+
+
+
+---------------------------------------------------------
+- Blanc cassé et vert sauge : Un blanc cassé apporte une luminosité subtile, tandis que le vert sauge ajoute une touche de nature et de fraîcheur :
+
+body {
+    background-color: #F5F5DC; /* Blanc cassé */
+    color: #6B8E23; /* Vert sauge */
+}
+
+.header, .footer {
+    background-color: #6B8E23; /* Vert sauge */
+    color: #F5F5DC; /* Blanc cassé */
+}
+
+a {
+    color: #6B8E23; /* Vert sauge */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #556B2F; /* Vert sauge foncé */
+}
+
+a:active {
+    color: #8FBC8F; /* Vert pâle */
+}
+
+.button {
+    background-color: #6B8E23; /* Vert sauge */
+    color: #F5F5DC; /* Blanc cassé */
+    border: 2px solid #F5F5DC;
+}
+
+.button:hover {
+    background-color: #556B2F; /* Vert sauge foncé */
+    color: #FFFFFF; /* Blanc */
+}
+
+.button:active {
+    background-color: #8FBC8F; /* Vert pâle */
+    color: #FFFFFF; /* Blanc */
+}
+---------------------------------------------------------
+- Bleu glacier et crème : Le bleu glacier est apaisant et élégant, tandis que le crème ajoute une chaleur douce :
+
+body {
+    background-color: #E0F7FA; /* Bleu glacier */
+    color: #FFFDD0; /* Crème */
+}
+
+.header, .footer {
+    background-color: #FFFDD0; /* Crème */
+    color: #E0F7FA; /* Bleu glacier */
+}
+
+a {
+    color: #E0F7FA; /* Bleu glacier */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #B2EBF2; /* Bleu glacier clair */
+}
+
+a:active {
+    color: #81D4FA; /* Bleu glacier foncé */
+}
+
+.button {
+    background-color: #E0F7FA; /* Bleu glacier */
+    color: #FFFDD0; /* Crème */
+    border: 2px solid #FFFDD0;
+}
+
+.button:hover {
+    background-color: #B2EBF2; /* Bleu glacier clair */
+    color: #FFFFFF; /* Blanc */
+}
+
+.button:active {
+    background-color: #81D4FA; /* Bleu glacier foncé */
+    color: #FFFFFF; /* Blanc */
+}
+---------------------------------------------------------
+- Jaune pastel et brun : Le jaune pastel est joyeux et lumineux, et le brun apporte une profondeur et une chaleur naturelle :
+
+body {
+    background-color: #FFFACD; /* Jaune pastel */
+    color: #8B4513; /* Brun */
+}
+
+.header, .footer {
+    background-color: #8B4513; /* Brun */
+    color: #FFFACD; /* Jaune pastel */
+}
+
+a {
+    color: #8B4513; /* Brun */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #A0522D; /* Brun clair */
+}
+
+a:active {
+    color: #D2691E; /* Brun foncé */
+}
+
+.button {
+    background-color: #FFFACD; /* Jaune pastel */
+    color: #8B4513; /* Brun */
+    border: 2px solid #8B4513;
+}
+
+.button:hover {
+    background-color: #A0522D; /* Brun clair */
+    color: #FFFFFF; /* Blanc */
+}
+
+.button:active {
+    background-color: #D2691E; /* Brun foncé */
+    color: #FFFFFF; /* Blanc */
+}
+---------------------------------------------------------
+- Orange seventies et blanc : L'orange seventies est chaleureux et vibrant, parfait pour des recettes épicées, tandis que le blanc garde l'espace lumineux ;
+
+body {
+    background-color: #FFA500; /* Orange seventies */
+    color: #FFFFFF; /* Blanc */
+}
+
+.header, .footer {
+    background-color: #FFFFFF; /* Blanc */
+    color: #FFA500; /* Orange seventies */
+}
+
+a {
+    color: #FFA500; /* Orange seventies */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF8C00; /* Orange foncé */
+}
+
+a:active {
+    color: #FF4500; /* Rouge-orangé */
+}
+
+.button {
+    background-color: #FFA500; /* Orange seventies */
+    color: #FFFFFF; /* Blanc */
+    border: 2px solid #FFFFFF;
+}
+
+.button:hover {
+    background-color: #FF8C00; /* Orange foncé */
+    color: #FFFFFF; /* Blanc */
+}
+
+.button:active {
+    background-color: #FF4500; /* Rouge-orangé */
+    color: #FFFFFF; /* Blanc */
+}
+---------------------------------------------------------
+- Rouge cerise et gris : Le rouge cerise ajoute une touche de passion, et le gris apporte une sophistication discrète :
+
+body {
+    background-color: #FF6347; /* Rouge cerise */
+    color: #696969; /* Gris */
+}
+
+.header, .footer {
+    background-color: #696969; /* Gris */
+    color: #FF6347; /* Rouge cerise */
+}
+
+a {
+    color: #FF6347; /* Rouge cerise */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #B22222; /* Rouge foncé */
+}
+
+a:active {
+    color: #CD5C5C; /* Rouge pâle */
+}
+
+.button {
+    background-color: #FF6347; /* Rouge cerise */
+    color: #696969; /* Gris */
+    border: 2px solid #696969;
+}
+
+.button:hover {
+    background-color: #B22222; /* Rouge foncé */
+    color: #FFFFFF; /* Blanc */
+}
+
+.button:active {
+    background-color: #CD5C5C; /* Rouge pâle */
+    color: #FFFFFF; /* Blanc */
+}

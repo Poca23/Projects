@@ -1,0 +1,8 @@
+Gustar.ioAPI : 
+Cette API offre une vaste collection de recettes francophones et permet de rechercher des recettes en fonction de critères spécifiques. Elle propose également un générateur de recettes personnalisées1.
+
+RecetteAPI : 
+Une API open-source conçue pour alimenter une application mobile dédiée à la gestion des recettes culinaires. Elle offre des fonctionnalités CRUD (Créer, Lire, Mettre à jour, Supprimer) pour gérer les recettes, les catégories et les ingrédients2.
+
+Mr. Cook API : 
+Cette API permet de gérer toutes vos recettes dans une seule application, de numériser des recettes manuscrites, d'importer des recettes depuis d'autres sites web et de créer de nouvelles recettes grâce à l'IA.

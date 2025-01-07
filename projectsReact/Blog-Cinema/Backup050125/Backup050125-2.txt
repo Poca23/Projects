@@ -1,0 +1,3563 @@
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+PAGES
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+PageHome:
+"
+import React, { useState } from "react";
+import PageTemplate from "../../components/PageTemplate/PageTemplate.js";
+import CarouselComponent from "../../components/Carousel/Carousel.js";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.js";
+import SearchBar from "../../components/SearchBar/SearchBar.js"; // Importation du composant SearchBar
+import "./PageHome.css"; // Assurez-vous que ce chemin est correct
+
+const initialCategories = [
+  "Action",
+  "Fantaisie",
+  "Aventure",
+  "Drame",
+  "SF",
+  "Horreur",
+  "Comédie",
+  "Romantique",
+];
+
+const HomePage = () => {
+  const [query, setQuery] = useState("");
+  const [categories] = useState(initialCategories);
+
+  return (
+    <PageTemplate>
+      <SectionTitle
+        title="Catégories de Films"
+        description="Explorez nos critiques par catégorie."
+      />
+      <div className="search-bar-container">
+        <SearchBar
+          placeholder="Rechercher un film..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          categories={categories} // Transmettre les catégories au composant SearchBar
+        />
+      </div>
+      <CarouselComponent className="carousel-component" />
+    </PageTemplate>
+  );
+};
+
+export default HomePage;
+"
+"
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px; /* Réduire la marge supérieure */
+  margin-bottom: -38px; /* Réduire la marge inférieure */
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.movie-card {
+  background-color: rgba(30, 30, 30, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  color: #f1f1f1;
+  font-size: 16px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.movie-card p {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2px;
+  transform: translate(138%, -7%);
+}
+"
+PageCategories :
+"
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import PageTemplate from "../../components/PageTemplate/PageTemplate.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.js";
+import "./PageCategories.css";
+
+const initialCategories = [
+  { name: "Action", movies: [] },
+  { name: "Fantaisie", movies: [] },
+  { name: "Aventure", movies: [] },
+  { name: "Drame", movies: [] },
+  { name: "SF", movies: [] },
+  { name: "Horreur", movies: [] },
+  { name: "Comédie", movies: [] },
+  { name: "Romantique", movies: [] },
+];
+
+const CategoriesPage = () => {
+  const [categories, setCategories] = useState(() => {
+    const savedCategories = localStorage.getItem("categories");
+    return savedCategories ? JSON.parse(savedCategories) : initialCategories;
+  });
+  const [newCategory, setNewCategory] = useState("");
+  const [editIndex, setEditIndex] = useState(-1);
+  const [editCategoryName, setEditCategoryName] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    if (
+      Array.isArray(categories) &&
+      categories.every(
+        (cat) =>
+          typeof cat === "object" &&
+          cat.hasOwnProperty("name") &&
+          cat.hasOwnProperty("movies")
+      )
+    ) {
+      localStorage.setItem("categories", JSON.stringify(categories));
+    } else {
+      setCategories(initialCategories);
+    }
+  }, [categories]);
+
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const addCategory = () => {
+    if (newCategory) {
+      setCategories([...categories, { name: newCategory, movies: [] }]);
+      setNewCategory("");
+    }
+  };
+
+  const deleteCategory = (index) => {
+    setCategories(categories.filter((_, i) => i !== index));
+  };
+
+  const editCategory = (index) => {
+    setEditIndex(index);
+    setEditCategoryName(categories[index].name);
+  };
+
+  const saveEditCategory = (index) => {
+    const updatedCategories = categories.map((cat, i) =>
+      i === index ? { ...cat, name: editCategoryName } : cat
+    );
+    setCategories(updatedCategories);
+    setEditIndex(-1);
+    setEditCategoryName("");
+  };
+
+  const addMovieToCategory = (imdbID, title, category) => {
+    const updatedCategories = categories.map((cat) => {
+      if (cat.name === category) {
+        return { ...cat, movies: [...cat.movies, { imdbID, title }] };
+      }
+      return cat;
+    });
+    setCategories(updatedCategories);
+    localStorage.setItem("categories", JSON.stringify(updatedCategories)); // Mise à jour du localStorage
+  };
+
+  return (
+    <PageTemplate>
+      <div className="categories-page">
+        <SectionTitle
+          title="Catégories de Films"
+          description="Explorez nos critiques par catégorie."
+        />
+        <SearchBar
+          placeholder="Rechercher un film..."
+          value={searchTerm}
+          onChange={handleInputChange}
+          categories={categories.map((cat) => cat.name)} // Transformation en noms
+          onAddToCategory={addMovieToCategory}
+        />
+
+        <div className="categories-container">
+          {Array.isArray(categories) && categories.length > 0 ? (
+            categories.map((category, index) => (
+              <div className="category-card" key={index}>
+                {editIndex === index ? (
+                  <div className="category-title">
+                    <input
+                      type="text"
+                      value={editCategoryName}
+                      onChange={(e) => setEditCategoryName(e.target.value)}
+                      onBlur={() => saveEditCategory(index)}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && saveEditCategory(index)
+                      }
+                      autoFocus
+                    />
+                  </div>
+                ) : (
+                  <div className="category-title">
+                    <Link to={`/categorie/${index}`} className="category-link">
+                      <h2>{category.name}</h2>
+                    </Link>
+                  </div>
+                )}
+                <div className="category-actions">
+                  <button
+                    className="edit-btn"
+                    onClick={() => editCategory(index)}
+                  >
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteCategory(index)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Aucune catégorie disponible.</p>
+          )}
+
+          <div className="add-category-card">
+            <input
+              type="text"
+              value={newCategory}
+              onChange={(e) => setNewCategory(e.target.value)}
+              placeholder="Nouvelle catégorie"
+            />
+            <button className="add-btn" onClick={addCategory}>
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </PageTemplate>
+  );
+};
+
+export default CategoriesPage;
+"
+
+"
+.categories-page {
+  padding: 20px;
+  background: url("../../../public/media/images/movie-theater-2093264_1920.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 70px;
+}
+
+.category-card,
+.add-category-card {
+  background-color: rgba(30, 30, 30, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  height: 250px;
+  width: 250px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.category-card:hover,
+.add-category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-title {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 2;
+  color: #f1f1f1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-title h2 {
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.category-title input {
+  width: 80%;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.category-title:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.category-title:active {
+  transform: scale(1.05);
+}
+
+.category-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 3;
+  margin-top: 10px;
+}
+
+.edit-btn,
+.delete-btn,
+.add-btn {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 30, 30, 1) 0%,
+    rgba(229, 21, 21, 1) 40%,
+    rgba(30, 30, 30, 0.6143187066974596) 79%
+  );
+  color: #f1f1f1;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.edit-btn:hover,
+.delete-btn:hover,
+.add-btn:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(229, 21, 21, 1) 0%,
+    rgba(30, 30, 30, 1) 40%,
+    rgba(229, 21, 21, 1) 79%
+  );
+}
+
+.add-category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-category-card .add-btn {
+  margin-top: 10px;
+}
+
+.movie-list {
+  margin-top: 20px;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.movie-item {
+  margin: 5px 0;
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  width: 70%;
+  box-sizing: border-box;
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 0 5px 5px 0;
+  width: 30%;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 300px;
+  background-color: rgba(30, 30, 30, 0.9);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  transition: background 0.3s;
+  width: 100%;
+  background-color: rgba(30, 30, 30, 0.9);
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background-color: rgba(229, 21, 21, 0.8);
+}
+
+.suggestion-item img {
+  width: 70px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.suggestion-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: calc(100% - 80px);
+}
+
+.suggestion-item span {
+  color: #f1f1f1;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggestions-list.adjust-up {
+  top: auto;
+  bottom: calc(100% + 2px);
+}
+"
+
+PageCategory :
+"
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import PageTemplate from "../../components/PageTemplate/PageTemplate.js";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.js";
+import "./PageCategory.css"; // Chemin correct vers le fichier CSS
+
+const CategoryPage = () => {
+  const { id } = useParams();
+  const [categoryName, setCategoryName] = useState("");
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const categories = JSON.parse(localStorage.getItem("categories")) || [];
+    const category = categories[id];
+    setCategoryName(category ? category.name : "");
+
+    if (category) {
+      const fetchMovies = async () => {
+        const updatedMovies = await Promise.all(
+          category.movies.map(async (movie) => {
+            const response = await fetch(
+              `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=3b12adf8`
+            );
+            const data = await response.json();
+            return {
+              ...movie,
+              poster: data.Poster,
+            };
+          })
+        );
+        setMovies(updatedMovies);
+      };
+
+      fetchMovies();
+    }
+  }, [id]);
+
+  const removeMovieFromCategory = (imdbID) => {
+    const categories = JSON.parse(localStorage.getItem("categories")) || [];
+    const category = categories[id];
+    if (category) {
+      const updatedMovies = category.movies.filter(
+        (movie) => movie.imdbID !== imdbID
+      );
+      categories[id].movies = updatedMovies;
+      localStorage.setItem("categories", JSON.stringify(categories));
+      setMovies(updatedMovies);
+    }
+  };
+
+  return (
+    <PageTemplate>
+      <SectionTitle
+        title={`Catégorie : ${categoryName}`}
+        description={`Découvrez les films de la catégorie ${categoryName}.`}
+      />
+      <div className="category-page">
+        <Link to="/categories" className="back-link">
+          Retour à la liste des catégories
+        </Link>
+        <div className="movies-list">
+          {movies.map((movie) => (
+            <div key={movie.imdbID} className="movie-card">
+              <img src={movie.poster} alt={movie.title} />
+              <h3>{movie.title}</h3>
+              <button
+                onClick={() => removeMovieFromCategory(movie.imdbID)}
+                className="delete-movie-btn"
+              >
+                Supprimer
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </PageTemplate>
+  );
+};
+
+export default CategoryPage;
+"
+
+".category-page {
+  padding: 20px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  background-color: rgba(30, 30, 30, 0.8);
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.back-link:hover {
+  background-color: rgba(229, 21, 21, 1);
+  color: #fff;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.movie-card {
+  background-color: rgba(30, 30, 30, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  color: #f1f1f1;
+  font-size: 16px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.delete-movie-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e51515;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.delete-movie-btn:hover {
+  background-color: #a61010;
+}
+"
+
+PageDetailFilm :
+"
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import PageTemplate from "../../components/PageTemplate/PageTemplate.js";
+import "./PageDetailFilm.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHeart,
+  faEye,
+  faStar,
+  faShareAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+
+const DetailsFilmPage = () => {
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+  const [trailerId, setTrailerId] = useState(null); // Ajoutez cet état pour l'ID de la bande-annonce
+  const [error, setError] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isWatched, setIsWatched] = useState(false);
+  const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        // Récupérer les détails du film depuis TMDb
+        const tmdbApiKey = "48a751c85b6b3d4c0750582c52468efb";
+        const tmdbResponse = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=${tmdbApiKey}&language=fr-FR&append_to_response=videos`
+        );
+        const tmdbData = await tmdbResponse.json();
+
+        // Utiliser l'ID IMDb pour récupérer les détails depuis OMDb
+        const imdbId = tmdbData.imdb_id;
+        if (!imdbId) {
+          throw new Error("IMDb ID non disponible.");
+        }
+
+        const omdbApiKey = "3b12adf8";
+        const omdbResponse = await fetch(
+          `http://www.omdbapi.com/?i=${imdbId}&apikey=${omdbApiKey}`
+        );
+        const omdbData = await omdbResponse.json();
+        if (omdbData.Response === "False") {
+          throw new Error(omdbData.Error);
+        }
+
+        setMovie(omdbData);
+
+        // Récupérer l'ID de la bande-annonce
+        const trailer = tmdbData.videos.results.find(
+          (video) => video.type === "Trailer"
+        );
+        if (trailer) {
+          setTrailerId(trailer.key);
+        }
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchMovie();
+  }, [id]);
+
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  const handleWatchedClick = () => {
+    setIsWatched(!isWatched);
+  };
+
+  const handleRatingChange = (index) => {
+    if (index === 0 && rating === 1) {
+      setRating(0);
+    } else {
+      setRating(index + 1);
+    }
+  };
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <PageTemplate>
+      <div className="film-detail-page">
+        <div className="left-column">
+          <img src={movie.Poster} alt={movie.Title} className="film-poster" />
+          <div className="film-category">
+            <strong>Category: </strong>
+            {movie.Genre}
+          </div>
+          <div className="film-rating">
+            <strong>Rate this movie: </strong>
+            {[...Array(5)].map((star, index) => (
+              <FontAwesomeIcon
+                key={index}
+                icon={faStar}
+                color={index < rating ? "gold" : "gray"}
+                onClick={() => handleRatingChange(index)}
+                style={{ cursor: "pointer" }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="middle-column">
+          <div className="film-title-section">
+            <h1>{movie.Title}</h1>
+            <div className="film-icons">
+              <button onClick={handleFavoriteClick}>
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  color={isFavorite ? "red" : "white"}
+                />
+              </button>
+              <button onClick={handleWatchedClick}>
+                <FontAwesomeIcon
+                  icon={faEye}
+                  color={isWatched ? "green" : "white"}
+                />
+              </button>
+              <button>
+                <FontAwesomeIcon icon={faShareAlt} />
+              </button>
+              <button>
+                <FontAwesomeIcon icon={faFacebook} />
+              </button>
+              <button>
+                <FontAwesomeIcon icon={faInstagram} />
+              </button>
+            </div>
+          </div>
+          <h3>Synopsis</h3>
+          <p className="film-description">{movie.Plot}</p>
+          <div className="film-details">
+            <h3>Director: {movie.Director}</h3>
+            <h3>Actors: {movie.Actors}</h3>
+            <h3>Genre: {movie.Genre}</h3>
+            <h3>Language: {movie.Language}</h3>
+            <h3>Runtime: {movie.Runtime}</h3>
+          </div>
+        </div>
+
+        <div className="right-column">
+          <h3>Trailer</h3>
+          {trailerId ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${trailerId}`}
+              title="Film Trailer"
+              className="film-trailer"
+              allowFullScreen
+            />
+          ) : (
+            <p>No trailer available.</p>
+          )}
+          <div className="film-ratings">
+            <strong>Internet Movie Database: </strong>
+            {movie.imdbRating} / 10
+          </div>
+          <div className="film-ratings">
+            <strong>Metacritic: </strong>
+            {movie.Metascore} / 100
+          </div>
+        </div>
+      </div>
+    </PageTemplate>
+  );
+};
+
+export default DetailsFilmPage;
+"
+/* src/pages/DetailsFilmPage/PageDetailFilm.css */
+
+.film-detail-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  color: #f1f1f1;
+  background-color: #121212; /* Fond sombre pour un look élégant */
+}
+
+.left-column,
+.middle-column,
+.right-column {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligner le contenu à gauche */
+}
+
+.middle-column {
+  margin-left: -20px; /* Réduire l'espacement entre la partie centrale et la partie gauche */
+}
+
+.film-poster {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Ombre pour un effet d'élévation */
+}
+
+.film-category,
+.film-rating,
+.film-ratings {
+  margin-top: 20px;
+}
+
+.film-title-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.film-icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: 10px;
+  color: inherit;
+}
+
+.film-icons .heart-button {
+  color: white; /* Couleur par défaut de l'icône de cœur */
+}
+
+.film-icons .heart-button:hover {
+  color: #ff6347; /* Couleur au survol, par exemple, un rouge tomate */
+}
+
+.film-icons .heart-button:active {
+  color: #ff0000; /* Couleur au clic, rouge vif */
+}
+
+.film-info h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.film-description {
+  margin-top: 20px;
+  font-size: 1.3rem; /* Grossir un peu le texte */
+  line-height: 1.6;
+  color: #f1f1f1; /* Changer la couleur en #f1f1f1 */
+  text-align: left; /* Aligner à gauche */
+}
+
+.film-details {
+  font-size: 1rem;
+  margin-top: 20px;
+  text-align: left; /* Aligner à gauche */
+}
+
+.film-details h3 {
+  font-size: 1.1rem; /* Diminuer la taille des textes */
+  color: #f1f1f1; /* Changer la couleur en #f1f1f1 */
+  margin-bottom: 10px;
+}
+
+.film-trailer {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  border: none;
+}
+
+.film-rating .fa-star {
+  transition: color 0.3s ease; /* Pour une transition douce */
+}
+
+.film-rating .fa-star:hover {
+  color: #ffd700; /* Couleur jaune plus douce */
+}
+
+.film-rating .fa-star:hover ~ .fa-star {
+  color: gray; /* Rendre les étoiles suivantes grises au survol */
+}
+"
+
+PageFavoris :
+"
+import React, { useState, useEffect } from "react";
+import PageTemplate from "../../components/PageTemplate/PageTemplate.js";
+import "./PageFavoris.css";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.js";
+
+const FavorisPage = () => {
+  const [bestMovies, setBestMovies] = useState(() => {
+    const savedBestMovies = localStorage.getItem("bestMovies");
+    return savedBestMovies
+      ? JSON.parse(savedBestMovies)
+      : [
+          {
+            title: "Film 1",
+            description: "Description du Film 1",
+            image: "URL_Image_Film_1",
+          },
+          {
+            title: "Film 2",
+            description: "Description du Film 2",
+            image: "URL_Image_Film_2",
+          },
+        ];
+  });
+
+  const [revoirMovies, setRevoirMovies] = useState(() => {
+    const savedRevoirMovies = localStorage.getItem("revoirMovies");
+    return savedRevoirMovies
+      ? JSON.parse(savedRevoirMovies)
+      : [
+          {
+            title: "Film 3",
+            description: "Description du Film 3",
+            image: "URL_Image_Film_3",
+          },
+          {
+            title: "Film 4",
+            description: "Description du Film 4",
+            image: "URL_Image_Film_4",
+          },
+        ];
+  });
+
+  const [queryBest, setQueryBest] = useState("");
+  const [queryRevoir, setQueryRevoir] = useState("");
+  const [suggestionsBest, setSuggestionsBest] = useState([]);
+  const [suggestionsRevoir, setSuggestionsRevoir] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("bestMovies", JSON.stringify(bestMovies));
+  }, [bestMovies]);
+
+  useEffect(() => {
+    localStorage.setItem("revoirMovies", JSON.stringify(revoirMovies));
+  }, [revoirMovies]);
+
+  const searchMovies = async (query, setSuggestions) => {
+    const response = await fetch(
+      `http://www.omdbapi.com/?s=${query}&apikey=3b12adf8`
+    );
+    const data = await response.json();
+    if (data.Search) {
+      setSuggestions(data.Search.slice(0, 5)); // Limiter les suggestions à cinq
+    }
+  };
+
+  useEffect(() => {
+    if (queryBest) {
+      searchMovies(queryBest, setSuggestionsBest);
+    } else {
+      setSuggestionsBest([]);
+    }
+  }, [queryBest]);
+
+  useEffect(() => {
+    if (queryRevoir) {
+      searchMovies(queryRevoir, setSuggestionsRevoir);
+    } else {
+      setSuggestionsRevoir([]);
+    }
+  }, [queryRevoir]);
+
+  const addMovie = (movie, setMovies, querySetter, suggestionsSetter) => {
+    const newMovie = {
+      title: movie.Title,
+      description: "", // Pas besoin de description
+      image: movie.Poster,
+    };
+    setMovies((movies) => [...movies, newMovie]);
+    querySetter("");
+    suggestionsSetter([]);
+  };
+
+  const removeMovie = (index, listSetter) => {
+    listSetter((movies) => movies.filter((_, i) => i !== index));
+  };
+
+  return (
+    <PageTemplate>
+      <SectionTitle
+        title="Films Favoris"
+        description="Mes films favoris classés par catégories."
+      />
+
+      <div className="favorites-page">
+        <div className="movies-section">
+          <div className="section-header">
+            <h2>THE BEST</h2>
+            <input
+              type="text"
+              placeholder="Rechercher un film..."
+              value={queryBest}
+              onChange={(e) => setQueryBest(e.target.value)}
+              className="search-input"
+            />
+          </div>
+          <div className="movies-list">
+            {suggestionsBest.length > 0 && (
+              <div className="suggestions-list">
+                {suggestionsBest.map((movie, index) => (
+                  <div
+                    key={index}
+                    className="suggestion-item"
+                    onClick={() =>
+                      addMovie(
+                        movie,
+                        setBestMovies,
+                        setQueryBest,
+                        setSuggestionsBest
+                      )
+                    }
+                  >
+                    <img src={movie.Poster} alt={movie.Title} />
+                    <div className="suggestion-item-content">
+                      <span>{movie.Title}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {bestMovies.map((movie, index) => (
+              <div className="movie-card" key={index}>
+                <img src={movie.image} alt={movie.title} />
+                <h3>{movie.title}</h3>
+                <p>{movie.description}</p>
+                <button onClick={() => removeMovie(index, setBestMovies)}>
+                  Retirer
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="movies-section">
+          <div className="section-header">
+            <h2>A REVOIR</h2>
+            <input
+              type="text"
+              placeholder="Rechercher un film..."
+              value={queryRevoir}
+              onChange={(e) => setQueryRevoir(e.target.value)}
+              className="search-input"
+            />
+          </div>
+          <div className="movies-list">
+            {suggestionsRevoir.length > 0 && (
+              <div className="suggestions-list">
+                {suggestionsRevoir.map((movie, index) => (
+                  <div
+                    key={index}
+                    className="suggestion-item"
+                    onClick={() =>
+                      addMovie(
+                        movie,
+                        setRevoirMovies,
+                        setQueryRevoir,
+                        setSuggestionsRevoir
+                      )
+                    }
+                  >
+                    <img src={movie.Poster} alt={movie.Title} />
+                    <div className="suggestion-item-content">
+                      <span>{movie.Title}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {revoirMovies.map((movie, index) => (
+              <div className="movie-card" key={index}>
+                <img src={movie.image} alt={movie.title} />
+                <h3>{movie.title}</h3>
+                <p>{movie.description}</p>
+                <button onClick={() => removeMovie(index, setRevoirMovies)}>
+                  Retirer
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </PageTemplate>
+  );
+};
+
+export default FavorisPage;
+"
+
+".favorites-page {
+  padding: 20px;
+  background: url("../../../public/media/images/movie-theater-2093264_1920.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh; /* Assurer que la page prend toute la hauteur */
+}
+
+.add-movie-card {
+  background-color: rgba(30, 30, 30, 0.8); /* Fond noir semi-transparent */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  height: 150px;
+  width: 200px; /* Assurer que la carte a la même largeur que les autres */
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: visible; /* Permettre aux suggestions de sortir de la carte */
+}
+
+.add-movie-card input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%; /* S'adapter à la largeur de la barre de recherche */
+  max-width: 300px; /* Limiter la largeur maximale à 300px */
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur */
+}
+
+.movies-section {
+  margin-bottom: 40px;
+  margin-left: 30px; /* Ajuster la marge pour déplacer légèrement vers la droite */
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap; /* Permettre aux cartes de s'adapter à la taille de l'écran */
+  gap: 20px;
+  justify-content: center; /* Centrer les cartes */
+}
+
+.movie-card {
+  background-color: rgba(30, 30, 30, 0.8); /* Fond noir semi-transparent */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  height: 300px;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  color: #f1f1f1;
+  font-size: 16px;
+  line-height: 1.2; /* Proportionnel à la taille de l'image */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limiter à deux lignes */
+  line-clamp: 2; /* Limiter à deux lignes */
+  -webkit-box-orient: vertical;
+}
+
+.movie-card p {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+.movie-card button {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 30, 30, 1) 0%,
+    rgba(229, 21, 21, 1) 40%,
+    rgba(30, 30, 30, 0.6143187066974596) 79%
+  );
+  color: #f1f1f1;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+  position: absolute;
+  bottom: 20px; /* Assurer que le bouton reste en bas de la carte */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.movie-card button:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(229, 21, 21, 1) 0%,
+    rgba(30, 30, 30, 1) 40%,
+    rgba(229, 21, 21, 1) 79%
+  );
+}
+
+.search-bar {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* S'assurer que la barre de recherche prend toute la largeur disponible */
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 100%;
+  max-width: 500px; /* Limiter la largeur maximale à 300px */
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.search-bar .search-btn {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 30, 30, 1) 0%,
+    rgba(229, 21, 21, 1) 40%,
+    rgba(30, 30, 30, 0.6143187066974596) 79%
+  );
+  color: #f1f1f1;
+  border: 1px solid #1e1e1e;
+  border-left: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  transition: background 0.3s;
+}
+
+.search-bar .search-btn:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(229, 21, 21, 1) 0%,
+    rgba(30, 30, 30, 1) 40%,
+    rgba(229, 21, 21, 1) 79%
+  );
+}
+
+.search-bar .search-btn:active {
+  background-color: #f1f1f1;
+  color: #e51515;
+  border: 1px solid #e51515;
+}
+
+/* Ajustement des suggestions */
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligner les suggestions à gauche */
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(30, 30, 30, 0.9);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  transform: translateX(50%);
+  gap: 5px; /* Ajustement de la position */
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: flex-start; /* Aligner les éléments sur le haut */
+  cursor: pointer;
+  padding: 2px;
+  transition: background 0.3s;
+  width: 100%;
+  height: 75px; /* Limiter la hauteur */
+  margin-bottom: 1px; /* Réduire l'espacement entre les suggestions */
+  background-color: rgba(
+    30,
+    30,
+    30,
+    0.9
+  ); /* Assurer que chaque suggestion est visible */
+}
+
+.suggestion-item:hover {
+  background-color: rgba(229, 21, 21, 0.8);
+}
+
+.suggestion-item img {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.suggestion-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Aligner le contenu sur le centre */
+}
+
+.suggestion-item span {
+  color: #f1f1f1;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(
+    100% - 60px
+  ); /* Assurer que le texte reste dans la largeur autorisée */
+}
+
+/* Spécifique à la page Favoris */
+/* Ajustement de la position des suggestions */
+.favorites-page .suggestions-list {
+  transform: translate(75%, -156%); /* Centrer horizontalement */
+}
+"
+
+PageVisionnes :
+"
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import PageTemplate from "../../components/PageTemplate/PageTemplate.js";
+import SectionTitle from "../../components/SectionTitle/SectionTitle.js";
+import "./PageVisionnes.css";
+
+const SeesFilmsPage = () => {
+  const [seenMovies, setSeenMovies] = useState(() => {
+    const savedSeenMovies = localStorage.getItem("seenMovies");
+    return savedSeenMovies
+      ? JSON.parse(savedSeenMovies)
+      : [
+          {
+            title: "Film 1",
+            description: "Description du Film 1",
+            image: "URL_Image_Film_1",
+            id: "tt1234567", // Exemple d'ID
+          },
+          {
+            title: "Film 2",
+            description: "Description du Film 2",
+            image: "URL_Image_Film_2",
+            id: "tt2345678", // Exemple d'ID
+          },
+        ];
+  });
+
+  const [forgetMovies, setForgetMovies] = useState(() => {
+    const savedForgetMovies = localStorage.getItem("forgetMovies");
+    return savedForgetMovies
+      ? JSON.parse(savedForgetMovies)
+      : [
+          {
+            title: "Film 3",
+            description: "Description du Film 3",
+            image: "URL_Image_Film_3",
+            id: "tt3456789", // Exemple d'ID
+          },
+          {
+            title: "Film 4",
+            description: "Description du Film 4",
+            image: "URL_Image_Film_4",
+            id: "tt4567890", // Exemple d'ID
+          },
+        ];
+  });
+
+  const [querySeen, setQuerySeen] = useState("");
+  const [queryForget, setQueryForget] = useState("");
+  const [suggestionsSeen, setSuggestionsSeen] = useState([]);
+  const [suggestionsForget, setSuggestionsForget] = useState([]);
+  const suggestionsRefSeen = useRef(null);
+  const suggestionsRefForget = useRef(null);
+  const footerRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem("seenMovies", JSON.stringify(seenMovies));
+  }, [seenMovies]);
+
+  useEffect(() => {
+    localStorage.setItem("forgetMovies", JSON.stringify(forgetMovies));
+  }, [forgetMovies]);
+
+  const searchMovies = async (query, setSuggestions) => {
+    const response = await fetch(
+      `http://www.omdbapi.com/?s=${query}&apikey=3b12adf8`
+    );
+    const data = await response.json();
+    if (data.Search) {
+      setSuggestions(data.Search.slice(0, 5)); // Limiter les suggestions à cinq
+    } else {
+      setSuggestions([]); // Remettre les suggestions à zéro si aucun résultat n'est trouvé
+    }
+  };
+
+  useEffect(() => {
+    if (querySeen) {
+      searchMovies(querySeen, setSuggestionsSeen);
+    } else {
+      setSuggestionsSeen([]);
+    }
+  }, [querySeen]);
+
+  useEffect(() => {
+    if (queryForget) {
+      searchMovies(queryForget, setSuggestionsForget);
+    } else {
+      setSuggestionsForget([]);
+    }
+  }, [queryForget]);
+
+  useEffect(() => {
+    const adjustPosition = (ref) => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        const footerRect = footerRef.current.getBoundingClientRect();
+        if (rect.bottom > footerRect.top) {
+          ref.current.classList.add("adjust-up");
+        } else {
+          ref.current.classList.remove("adjust-up");
+        }
+      }
+    };
+
+    adjustPosition(suggestionsRefSeen);
+    adjustPosition(suggestionsRefForget);
+  }, [suggestionsSeen, suggestionsForget]);
+
+  const addMovie = (movie, setMovies, querySetter, suggestionsSetter) => {
+    const newMovie = {
+      title: movie.Title,
+      description: "", // Pas besoin de description
+      image: movie.Poster,
+      id: movie.imdbID,
+    };
+    setMovies((movies) => [...movies, newMovie]);
+    querySetter("");
+    suggestionsSetter([]);
+  };
+
+  const removeMovie = (index, listSetter) => {
+    listSetter((movies) => movies.filter((_, i) => i !== index));
+  };
+
+  return (
+    <PageTemplate>
+      <SectionTitle
+        title="Films Vu"
+        description="Mes films déjà vus et à oublier."
+      />
+
+      <div className="vue-page">
+        <div className="movies-section">
+          <div className="section-header">
+            <h2>Déjà vu</h2>
+            <input
+              type="text"
+              placeholder="Rechercher un film..."
+              value={querySeen}
+              onChange={(e) => setQuerySeen(e.target.value)}
+              className="search-input"
+            />
+          </div>
+          {suggestionsSeen.length > 0 && (
+            <div className="suggestions-list" ref={suggestionsRefSeen}>
+              {suggestionsSeen.map((movie, index) => (
+                <div
+                  key={index}
+                  className="suggestion-item"
+                  onClick={() =>
+                    addMovie(
+                      movie,
+                      setSeenMovies,
+                      setQuerySeen,
+                      setSuggestionsSeen
+                    )
+                  }
+                >
+                  <img src={movie.Poster} alt={movie.Title} />
+                  <div className="suggestion-item-content">
+                    <span>{movie.Title}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="movies-list">
+            {seenMovies.map((movie, index) => (
+              <div className="movie-card" key={index}>
+                <Link to={`/detail-film/${movie.id}`}>
+                  <img
+                    src={movie.image}
+                    alt={movie.title}
+                    className="poster-link"
+                  />
+                </Link>
+                <h3>{movie.title}</h3>
+                <p>{movie.description}</p>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeMovie(index, setSeenMovies);
+                  }}
+                >
+                  Retirer
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="movies-section">
+          <div className="section-header">
+            <h2>À oublier</h2>
+            <input
+              type="text"
+              placeholder="Rechercher un film..."
+              value={queryForget}
+              onChange={(e) => setQueryForget(e.target.value)}
+              className="search-input"
+            />
+          </div>
+          {suggestionsForget.length > 0 && (
+            <div className="suggestions-list" ref={suggestionsRefForget}>
+              {suggestionsForget.map((movie, index) => (
+                <div
+                  key={index}
+                  className="suggestion-item"
+                  onClick={() =>
+                    addMovie(
+                      movie,
+                      setForgetMovies,
+                      setQueryForget,
+                      setSuggestionsForget
+                    )
+                  }
+                >
+                  <img src={movie.Poster} alt={movie.Title} />
+                  <div className="suggestion-item-content">
+                    <span>{movie.Title}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="movies-list">
+            {forgetMovies.map((movie, index) => (
+              <div className="movie-card" key={index}>
+                <Link to={`/detail-film/${movie.id}`}>
+                  <img
+                    src={movie.image}
+                    alt={movie.title}
+                    className="poster-link"
+                  />
+                </Link>
+                <h3>{movie.title}</h3>
+                <p>{movie.description}</p>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeMovie(index, setForgetMovies);
+                  }}
+                >
+                  Retirer
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div ref={footerRef}></div>
+      </div>
+    </PageTemplate>
+  );
+};
+
+export default SeesFilmsPage;
+"
+
+"
+/* src/pages/PageVisionnes/PageVisionnes.css */
+
+.vue-page {
+  padding: 20px;
+  background: url("../../../public/media/images/movie-theater-2093264_1920.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh; /* Assurer que la page prend toute la hauteur */
+}
+
+.add-movie-card {
+  display: none; /* Masquer la carte d'ajout de film */
+}
+
+.search-bar {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 100%; /* S'adapter à la largeur de la barre de recherche */
+  max-width: 500px; /* Limiter la largeur maximale à 500px */
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur */
+}
+
+.movies-section {
+  margin-bottom: 40px;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap; /* Permettre aux cartes de s'adapter à la taille de l'écran */
+  gap: 20px;
+  justify-content: center; /* Centrer les cartes */
+}
+
+.movie-card {
+  background-color: rgba(30, 30, 30, 0.8); /* Fond noir semi-transparent */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  height: 300px;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  color: #f1f1f1;
+  font-size: 16px;
+  line-height: 1.2; /* Proportionnel à la taille de l'image */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limiter à deux lignes */
+  line-clamp: 2; /* Limiter à deux lignes */
+  -webkit-box-orient: vertical;
+}
+
+.movie-card p {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+.movie-card button {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 30, 30, 1) 0%,
+    rgba(229, 21, 21, 1) 40%,
+    rgba(30, 30, 30, 0.6143187066974596) 79%
+  );
+  color: #f1f1f1;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+  position: absolute;
+  bottom: 20px; /* Assurer que le bouton reste en bas de la carte */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.movie-card button:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(229, 21, 21, 1) 0%,
+    rgba(30, 30, 30, 1) 40%,
+    rgba(229, 21, 21, 1) 79%
+  );
+}
+
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligner les suggestions à gauche */
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(30, 30, 30, 0.9);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+}
+
+.suggestions-list.adjust-up {
+  top: auto;
+  bottom: 100%; /* Remonter les suggestions si elles touchent le footer */
+  transform: translate(75%, 168.5%);
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: flex-start; /* Aligner les éléments sur le haut */
+  cursor: pointer;
+  padding: 2px;
+  transition: background 0.3s;
+  width: 100%;
+  height: 75px; /* Limiter la hauteur */
+  margin-bottom: 2px; /* Ajouter un espacement entre les suggestions */
+  background-color: rgba(
+    30,
+    30,
+    30,
+    0.9
+  ); /* Assurer que chaque suggestion est visible */
+}
+
+.suggestion-item:hover {
+  background-color: rgba(229, 21, 21, 0.8);
+}
+
+.suggestion-item img {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.suggestion-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Aligner le contenu sur le centre */
+}
+
+.suggestion-item span {
+  color: #f1f1f1;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(
+    100% - 60px
+  ); /* Assurer que le texte reste dans la largeur autorisée */
+}
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+App
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+"
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import React from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
+import PluginFiltre from "./components/PluginFiltre/PluginFiltre";
+import CategoriesPage from "./pages/PageCategories/PageCategories";
+import CategoryPage from "./pages/PageCategory/PageCategory";
+import DetailsFilmPage from "./pages/PageDetailFilm/PageDetailFilm";
+import FavorisPage from "./pages/PageFavoris/PageFavoris";
+import HomePage from "./pages/PageHome/PageHome";
+import SeesFilmsPage from "./pages/PageVisionnes/PageVisionnes";
+import Login from "./components/Login/Login";
+import AccountPage from "./components/AccountPage/AccountPage.js"; // Importation de la page Mon compte
+
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <PluginFiltre />
+        <Routes>
+          <Route path="/connexion" element={<Login />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/categorie/:id" element={<CategoryPage />} />
+          <Route path="/favoris" element={<FavorisPage />} />
+          <Route path="/visionnes" element={<SeesFilmsPage />} />
+          <Route path="/detail-film/:id" element={<DetailsFilmPage />} />
+          <Route path="/account" element={<AccountPage />} />{" "}
+          {/* Ajout de la route pour AccountPage */}
+        </Routes>
+      </div>
+    </Router>
+  );
+};
+
+export default App;
+"
+
+"
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+"
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+index
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+"
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+"
+
+"
+/* src/index.css */
+
+/* Typographie Générale */
+body {
+  font-family: "Open Sans", sans-serif;
+  background: url("../public/media/images/movie-theater-2093264_1920.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  color: #1e1e1e; /* Couleur de texte principale */
+  margin: 0;
+  padding: 0;
+}
+
+/* Titres */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto Slab", serif;
+  text-transform: uppercase;
+  color: #e51515; /* Couleur des titres */
+}
+
+/* Paragraphes */
+p {
+  font-family: "Open Sans", sans-serif;
+  color: #1e1e1e; /* Couleur des paragraphes */
+}
+
+/* Liens */
+a {
+  font-family: "Open Sans", sans-serif;
+  text-decoration: none;
+  color: #1e1e1e; /* Couleur des liens */
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #e51515; /* Couleur des liens au survol */
+}
+
+a:active {
+  text-decoration: underline;
+  color: #e51515; /* Couleur des liens lors du clic */
+}
+
+/* Boutons */
+button {
+  background-color: #1e1e1e; /* Fond noir doux */
+  color: #f1f1f1; /* Écriture blanche douce */
+  border: 1px solid #1e1e1e; /* Bordure noire douce */
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+button:hover {
+  background-color: #e51515; /* Fond rouge doux */
+  color: #f1f1f1; /* Écriture blanche douce */
+}
+
+button:active {app
+  color: #e51515; /* Écriture rouge douce */
+  border: 1px solid #e51515; /* Bordure rouge douce */
+}
+
+/* Annonces d'erreurs, de warnings et d'informations */
+.error-message {
+  background-color: #e51515; /* Rouge doux pour les erreurs */
+  color: #f1f1f1; /* Écriture blanche douce */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.warning-message {
+  background-color: #f1f1f1; /* Blanc doux pour les avertissements */
+  color: #1e1e1e; /* Écriture noire douce */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.info-message {
+  background-color: #1e1e1e; /* Noir doux pour les informations */
+  color: #f1f1f1; /* Écriture blanche douce */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Structure de la Page */
+main {
+  padding: 20px;
+}
+"
+
+"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+"
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+COMPONENTS
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+AccountPage :
+"import React, { useState, useEffect } from "react";
+import PageTemplate from "../PageTemplate/PageTemplate";
+import "./AccountPage.css"; // Utilisation du fichier CSS direct
+
+const AccountPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [isEditingEmail, setIsEditingEmail] = useState(false);
+
+  const [name, setName] = useState(() => {
+    const savedName = localStorage.getItem("accountName");
+    return savedName || "John Doe";
+  });
+
+  const [email, setEmail] = useState(() => {
+    const savedEmail = localStorage.getItem("accountEmail");
+    return savedEmail || "john.doe@example.com";
+  });
+
+  const [password, setPassword] = useState(() => {
+    const savedPassword = localStorage.getItem("accountPassword");
+    return savedPassword || "password123";
+  });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleEditingName = () => {
+    setIsEditingName(!isEditingName);
+  };
+
+  const toggleEditingEmail = () => {
+    setIsEditingEmail(!isEditingEmail);
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleKeyDown = (e, toggleFunction) => {
+    if (e.key === "Enter") {
+      toggleFunction();
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem("accountName", name);
+  }, [name]);
+
+  useEffect(() => {
+    localStorage.setItem("accountEmail", email);
+  }, [email]);
+
+  useEffect(() => {
+    localStorage.setItem("accountPassword", password);
+  }, [password]);
+
+  return (
+    <PageTemplate>
+      <div className="account-page">
+        <h1 className="title">Mon Compte</h1>
+        <div className="account-details">
+          <p>
+            Nom :
+            {isEditingName ? (
+              <input
+                type="text"
+                value={name}
+                onChange={handleNameChange}
+                onBlur={toggleEditingName}
+                onKeyDown={(e) => handleKeyDown(e, toggleEditingName)}
+                className="edit-input"
+                autoFocus
+              />
+            ) : (
+              <>
+                <span onClick={toggleEditingName}>{name}</span>
+                <i
+                  className="fas fa-pencil-alt edit-icon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleEditingName();
+                  }}
+                ></i>
+              </>
+            )}
+          </p>
+          <p>
+            Email :
+            {isEditingEmail ? (
+              <input
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                onBlur={toggleEditingEmail}
+                onKeyDown={(e) => handleKeyDown(e, toggleEditingEmail)}
+                className="edit-input"
+                autoFocus
+              />
+            ) : (
+              <>
+                <span onClick={toggleEditingEmail}>{email}</span>
+                <i
+                  className="fas fa-pencil-alt edit-icon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleEditingEmail();
+                  }}
+                ></i>
+              </>
+            )}
+          </p>
+          <p>
+            Mot de passe :
+            <span className="password">
+              {showPassword ? password : "********"}
+            </span>
+            <i
+              className={`fas ${
+                showPassword ? "fa-eye-slash" : "fa-eye"
+              } edit-icon`}
+              onClick={togglePasswordVisibility}
+            ></i>
+          </p>
+        </div>
+      </div>
+    </PageTemplate>
+  );
+};
+
+export default AccountPage;
+"
+
+".account-page {
+  padding: 20px;
+  text-align: center;
+}
+
+.account-details {
+  margin-bottom: 20px;
+  padding: 20px; /* Conserver le padding pour le confort */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  margin-left: calc(35% - 100px); /* Réduire la largeur d'environ 200 pixels */
+  margin-right: calc(35% - 100px); /* Réduire la largeur d'environ 200 pixels */
+}
+
+.account-details p {
+  color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22px; /* Augmenter davantage la taille de la police */
+}
+
+.edit-icon {
+  color: #f1f1f1;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.title {
+  color: #e51515;
+  text-align: center;
+  font-size: 44px; /* Augmenter davantage la taille de la police du titre */
+}
+
+.edit-input {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  width: 70%;
+  margin-left: 10px;
+  font-size: 20px; /* Augmenter davantage la taille de la police des champs de saisie */
+}
+
+.password {
+  margin-left: 10px;
+  font-size: 22px; /* Augmenter davantage la taille de la police du mot de passe */
+}
+"
+
+Carousel :
+"import React, { useEffect, useState } from "react";
+import { Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "./Carousel.css";
+
+const CarouselComponent = () => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const apiKey = "48a751c85b6b3d4c0750582c52468efb";
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=fr-FR&page=1`
+      );
+      const data = await response.json();
+      setMovies(data.results.slice(0, 12));
+    };
+
+    fetchMovies();
+  }, []);
+
+  const chunkArray = (arr, size) => {
+    const result = [];
+    for (let i = 0; i < arr.length; i += size) {
+      result.push(arr.slice(i, i + size));
+    }
+    return result;
+  };
+
+  const movieChunks = chunkArray(movies, 6);
+
+  return (
+    <Carousel>
+      {movieChunks.map((chunk, index) => (
+        <Carousel.Item key={index}>
+          <div className="d-flex justify-content-around">
+            {chunk.map((movie) => (
+              <div key={movie.id} className="carousel-movie">
+                <Link to={`/detail-film/${movie.id}`}>
+                  <img
+                    className="d-block w-100"
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.title}
+                  />
+                </Link>
+                <div className="movie-details"></div>
+              </div>
+            ))}
+          </div>
+        </Carousel.Item>
+      ))}
+    </Carousel>
+  );
+};
+
+export default CarouselComponent;
+"
+
+"
+.carousel-item img {
+  height: 600px; /* Ajuster la hauteur des images */
+  width: 100%; /* S'assurer que l'image prend toute la largeur de son conteneur */
+  object-fit: contain; /* Garder les proportions de l'image */
+  margin: 0 auto; /* Centrer l'image */
+}
+
+.carousel-movie {
+  flex: 1;
+  margin: 0 10px; /* Espacement entre les films */
+}
+
+.movie-details {
+  text-align: center;
+  padding: 10px;
+  width: 100%; /* Assurer que le résumé prend toute la largeur de l'affiche */
+}
+
+.movie-details h5 {
+  color: rgba(255, 255, 255, 0.9); /* Blanc adouci */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.movie-details p {
+  color: rgba(255, 255, 255, 0.7); /* Blanc adouci */
+  padding: 10px;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Ajouter les points de suspension */
+  white-space: nowrap; /* Limiter à une ligne */
+  background-color: rgba(0, 0, 0, 0.575);
+  border-radius: 5px;
+  width: 100%; /* Assurer que le résumé prend toute la largeur de l'affiche */
+  margin: 0; /* Supprimer les marges autour du résumé */
+}
+
+.movie-details a {
+  color: rgba(255, 255, 255, 0.7); /* Blanc adouci */
+  text-decoration: none;
+}
+
+.movie-details a:hover {
+  text-decoration: underline;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background: rgba(0, 0, 0, 0.5); /* Fond noir avec opacité de 50% */
+  border: 2px solid transparent; /* Bordure initialement transparente */
+  color: #fff;
+  font-size: 2.5rem; /* Augmenter la taille des flèches */
+  cursor: pointer;
+  width: 3rem; /* Définir la largeur des boutons */
+  height: 3rem; /* Définir la hauteur des boutons */
+  padding: 5px; /* Ajouter un léger padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, color 0.3s ease; /* Transition pour l'effet de hover */
+  border-radius: 50%; /* Bordures arrondies pour un look plus élégant */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  border-color: #ff5722; /* Changer la couleur de la bordure au survol */
+  color: #ff5722; /* Changer la couleur des icônes au survol */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 2rem; /* Ajuster la taille des icônes */
+  height: 2rem;
+  pointer-events: none; /* Assurer que seul le bouton est cliquable, pas l'icône directement */
+}
+"
+
+Footer :
+"
+import React from "react";
+import "./Footer.css";
+
+const Footer = () => {
+  return (
+    <footer>
+      <div className="footer-section logo">
+        <a href="/">
+          <img
+            src="../media/images/blog-logo.png"
+            alt="Blog de Cinéma"
+            className="logo-image-footer"
+          />
+        </a>
+      </div>
+      <div className="footer-section legal">
+        <p>
+          <a href="/mentions-legales" className="legal-link">
+            Mentions Légales
+          </a>
+        </p>
+      </div>
+      <div className="footer-section navigation">
+        <p>
+          <a href="/categories" className="nav-link">
+            Catégories
+          </a>
+        </p>
+        <p>
+          <a href="/favoris" className="nav-link">
+            Favoris
+          </a>
+        </p>
+        <p>
+          <a href="/visionnes" className="nav-link">
+            Visionnés
+          </a>
+        </p>
+      </div>
+      <div className="footer-section social">
+        <a href="https://www.facebook.com">
+          <i className="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com">
+          <i className="fab fa-instagram"></i>
+        </a>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+"
+
+"
+/* src/components/Footer.css */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logo-image-footer {
+  height: 60px; /* Réduire la taille du logo */
+  width: auto;
+  filter: contrast(0.2);
+}
+
+.legal-link,
+.nav-link {
+  color: #d3d3d3;
+  text-decoration: none;
+  margin: 5px 0;
+  padding: 8px;
+}
+
+.legal-link:hover,
+.nav-link:hover {
+  color: #e51515;
+}
+
+.social a {
+  font-size: 20px;
+  color: #d3d3d3;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.social a:hover {
+  color: #e51515;
+}
+"
+
+Login :
+"
+import React, { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import "./Login.css";
+
+const Login = () => {
+  const [recaptchaValue, setRecaptchaValue] = useState("");
+
+  const handleRecaptchaChange = (value) => {
+    setRecaptchaValue(value);
+  };
+
+  const handleSubmitLogin = (event) => {
+    event.preventDefault();
+    if (!recaptchaValue) {
+      alert("Veuillez compléter le reCAPTCHA.");
+      return;
+    }
+    console.log("Login:", event.target.login.value);
+    console.log("Mot de passe:", event.target.password.value);
+    console.log("Captcha:", recaptchaValue);
+  };
+
+  const handleSubmitSignup = (event) => {
+    event.preventDefault();
+    if (!recaptchaValue) {
+      alert("Veuillez compléter le reCAPTCHA.");
+      return;
+    }
+    console.log("Nom:", event.target.firstName.value);
+    console.log("Prénom:", event.target.lastName.value);
+    console.log("Email:", event.target.email.value);
+    console.log("Confirmer Email:", event.target.confirmEmail.value);
+    console.log("Mot de passe:", event.target.signupPassword.value);
+    console.log("Confirmer Mot de passe:", event.target.confirmPassword.value);
+    console.log("Captcha:", recaptchaValue);
+  };
+
+  return (
+    <div className="login-container">
+      <div className="form-section">
+        <form onSubmit={handleSubmitLogin} className="login-form">
+          <h3>Identification</h3>
+          <label htmlFor="login">Login:</label>
+          <input type="text" id="login" required />
+          <label htmlFor="password">Mot de passe:</label>
+          <input type="password" id="password" required />
+          <a href="#forgot-password">Mot de passe oublié ?</a>
+          <div className="captcha-container">
+            <ReCAPTCHA
+              sitekey="YOUR_RECAPTCHA_SITE_KEY"
+              onChange={handleRecaptchaChange}
+            />
+          </div>
+          <button type="submit">Se connecter</button>
+        </form>
+      </div>
+      <div className="divider"></div>
+      <div className="form-section">
+        <form onSubmit={handleSubmitSignup} className="signup-form">
+          <h3>Inscription</h3>
+          <label htmlFor="firstName">Prénom:</label>
+          <input type="text" id="firstName" required />
+          <label htmlFor="lastName">Nom:</label>
+          <input type="text" id="lastName" required />
+          <label htmlFor="email">Adresse mail:</label>
+          <input type="email" id="email" required />
+          <label htmlFor="confirmEmail">Confirmer l'adresse mail:</label>
+          <input type="email" id="confirmEmail" required />
+          <label htmlFor="signupPassword">Mot de passe:</label>
+          <input type="password" id="signupPassword" required />
+          <label htmlFor="confirmPassword">Confirmer le mot de passe:</label>
+          <input type="password" id="confirmPassword" required />
+          <div className="captcha-container">
+            <ReCAPTCHA
+              sitekey="YOUR_RECAPTCHA_SITE_KEY"
+              onChange={handleRecaptchaChange}
+            />
+          </div>
+          <button type="submit">S'inscrire</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
+"
+
+"
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px) {
+  .login-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+  }
+}
+
+.form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 5px;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Légère couleur de fond pour distinguer */
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  opacity: 0.5;
+}
+
+@media (min-width: 600px) {
+  .divider {
+    width: 2px;
+    height: auto;
+  }
+}
+
+h3 {
+  color: #f1f1f1;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+label {
+  color: #f1f1f1;
+  font-size: 1em;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+input {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.captcha-container {
+  margin-top: 20px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 10px;
+  display: block;
+  text-align: right;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+"
+
+Navbar :
+"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Login from "../Login/Login";
+import "./Navbar.css";
+
+const Navbar = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
+  return (
+    <nav>
+      <div className="logo">
+        <Link to="/">
+          <img
+            src="../media/images/blog-logo.png"
+            alt="Blog de Cinéma"
+            className="logo-image"
+          />
+        </Link>
+      </div>
+      <ul>
+        <li>
+          <Link to="/">
+            <i className="fas fa-home"></i>
+            <span>Home</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/categories">
+            <i className="fas fa-th-list"></i>
+            <span>Catégories</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/favoris">
+            <i className="fas fa-heart"></i>
+            <span>Favoris</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/visionnes">
+            <i className="fas fa-eye"></i>
+            <span>Visionnés</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/account">
+            <i className="fas fa-user"></i>
+            <span>Mon Compte</span>
+          </Link>
+        </li>
+      </ul>
+      <div className="connexion">
+        <button onClick={toggleForm}>
+          <i className="fas fa-sign-in-alt"></i>
+          <span>Connexion</span>
+        </button>
+        {showForm && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={toggleForm}>
+                &times;
+              </span>
+              <Login />
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+"
+
+"
+nav {
+  background-color: #000;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  position: fixed; /* Fixe le menu */
+  top: 0; /* Positionne le menu en haut */
+  width: 100%; /* Le menu occupe toute la largeur */
+  z-index: 1000; /* S'assure que le menu est au-dessus d'autres éléments */
+  margin-bottom: 20px; /* Ajout d'une marge inférieure pour créer de l'espace */
+}
+nav .logo a {
+  text-decoration: none;
+}
+nav .logo-image {
+  height: 60px;
+  width: auto;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+nav ul li a {
+  font-size: 20px;
+  color: #d3d3d3;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+nav ul li a:hover {
+  color: #e51515;
+}
+nav ul li a i {
+  margin-right: 8px; /* Espacement entre l'icône et le texte */
+}
+nav .connexion a {
+  font-size: 20px;
+  color: #d3d3d3;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+nav .connexion a:hover {
+  color: #e51515;
+}
+nav .connexion a i {
+  margin-right: 8px; /* Espacement entre l'icône et le texte */
+}
+/* Modal Styles */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.modal-content {
+  background-color: #000;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 800px; /* Agrandissez pour tenir les deux colonnes */
+  border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden; /* Pour éviter les débordements */
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #f1f1f1;
+  text-decoration: none;
+  cursor: pointer;
+}
+"
+
+PageTemplate :
+"
+import React from "react";
+import Navbar from "../Navbar/Navbar.js";
+import Footer from "../Footer/Footer.js";
+import "./PageTemplate.css";
+
+const PageTemplate = ({ children }) => {
+  return (
+    <div className="page-container">
+      <Navbar />
+      <div className="content">{children}</div>
+      <Footer />
+    </div>
+  );
+};
+
+export default PageTemplate;
+"
+
+"
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  padding-top: 100px; /* Ajouter un rembourrage en haut pour compenser la hauteur de la navbar */
+}
+"
+
+PluginFiltre :
+"
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFolder, faFilter, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom"; // Importation du composant Link
+import "./PluginFiltre.css";
+
+const PluginFiltre = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const fetchMovies = async () => {
+    try {
+      let query = `https://api.themoviedb.org/3/discover/movie?api_key=48a751c85b6b3d4c0750582c52468efb&language=fr-FR`;
+
+      if (selectedCategories.length > 0) {
+        query += `&with_genres=${selectedCategories.join(",")}`;
+      }
+
+      const response = await fetch(query);
+      const data = await response.json();
+      if (data.results) {
+        setMovies(data.results.slice(0, 20)); // Limiter les résultats à 20 films
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategories((prevCategories) => {
+      if (prevCategories.includes(category)) {
+        return prevCategories.filter((c) => c !== category);
+      } else {
+        return [...prevCategories, category];
+      }
+    });
+  };
+
+  const filteredMovies = movies.filter((movie) => {
+    if (selectedCategories.length === 0) return true;
+
+    return selectedCategories.some((category) =>
+      movie.genre_ids.includes(category)
+    );
+  });
+
+  return (
+    <div className="filter-container">
+      <button className="filter-button" onClick={toggleSidebar}>
+        <FontAwesomeIcon icon={faFilter} />
+      </button>
+      {isSidebarOpen && (
+        <div className="sidebar">
+          <div className="filters">
+            <h4>
+              <FontAwesomeIcon icon={faFolder} /> Catégorie
+            </h4>
+            <div className="filter-category">
+              {[
+                { id: 28, name: "Action" },
+                { id: 14, name: "Fantaisie" },
+                { id: 12, name: "Aventure" },
+                { id: 18, name: "Drame" },
+                { id: 878, name: "SF" },
+                { id: 27, name: "Horreur" },
+                { id: 35, name: "Comédie" },
+                { id: 10749, name: "Romantique" },
+              ].map((category) => (
+                <button
+                  key={category.id}
+                  className={
+                    selectedCategories.includes(category.id) ? "selected" : ""
+                  }
+                  onClick={() => handleCategoryClick(category.id)}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+            <button
+              className="show-movies-button"
+              onClick={() => {
+                fetchMovies();
+                toggleDropdown();
+              }}
+            >
+              Afficher les films possibles
+            </button>
+          </div>
+        </div>
+      )}
+      {isDropdownOpen && (
+        <div className="dropdown">
+          <button className="close-dropdown-button" onClick={toggleDropdown}>
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
+          <div className="movies-list">
+            {filteredMovies.map((movie, index) => (
+              <Link
+                to={`/detail-film/${movie.id}`}
+                key={index}
+                className="movie-card-link"
+              >
+                <div className="movie-card">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                    alt={movie.title}
+                  />
+                  <h3>{movie.title}</h3>
+                  <p>{movie.release_date}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default PluginFiltre;
+"
+
+"
+.filter-container {
+  position: relative;
+}
+
+.filter-button {
+  position: fixed;
+  top: 85px; /* Juste en-dessous de la navbar */
+  left: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  z-index: 1000;
+}
+
+.filter-button:hover {
+  background-color: #e51515;
+  color: #fff;
+}
+
+.sidebar {
+  position: fixed;
+  top: 78px; /* Juste en-dessous de la navbar */
+  left: 0;
+  bottom: 60px; /* Juste au-dessus du footer */
+  width: 280px;
+  height: calc(
+    100% - 145px
+  ); /* Prendre la hauteur entre la navbar et le footer */
+  overflow-y: auto; /* Permettre le défilement vertical */
+  background-color: #d3d3d3;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filters h4 {
+  width: 100%; /* Pour que les titres de section prennent toute la largeur */
+  margin: 10px 0 5px;
+  font-size: 14px; /* Réduire la taille des titres */
+  text-align: center; /* Centrer les titres */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px; /* Espacement entre l'icône et le texte */
+}
+
+.filters button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  flex: 0 1 auto; /* Prendre seulement la largeur nécessaire */
+  text-align: left;
+}
+
+.filters button:hover,
+.filters button.selected {
+  background-color: #e51515;
+  color: #fff;
+}
+
+.filters .filter-category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.show-movies-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+}
+
+.show-movies-button:hover {
+  background-color: #e51515;
+  color: #fff;
+}
+
+.dropdown {
+  position: fixed;
+  top: 78px; /* Juste en-dessous de la navbar */
+  left: 280px; /* À droite de la sidebar */
+  bottom: 60px; /* Juste au-dessus du footer */
+  width: calc(100% - 280px); /* Prendre la largeur restante de l'écran */
+  height: calc(
+    100% - 145px
+  ); /* Prendre la hauteur entre la navbar et le footer */
+  overflow-y: auto; /* Permettre le défilement vertical */
+  background-color: rgba(0, 0, 0, 0.9); /* Fond noir semi-transparent */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.close-dropdown-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  align-self: flex-end;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.close-dropdown-button:hover {
+  background-color: #e51515;
+  color: #fff;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.movie-card {
+  background-color: rgba(30, 30, 30, 0.8); /* Fond noir semi-transparent */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  color: #f1f1f1;
+  font-size: 16px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.movie-card p {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+"
+
+SearchBar :
+"
+import React, { useState, useRef, useEffect } from "react";
+import PropTypes from "prop-types";
+import "./SearchBar.css";
+
+const SearchBar = ({
+  placeholder,
+  value,
+  onChange,
+  categories,
+  onAddToCategory,
+}) => {
+  const [suggestions, setSuggestions] = useState([]);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [movieToAdd, setMovieToAdd] = useState(null);
+  const suggestionsRef = useRef(null);
+  const inputRef = useRef(null);
+
+  const searchMovies = async (query) => {
+    try {
+      const response = await fetch(
+        `http://www.omdbapi.com/?s=${query}&apikey=3b12adf8`
+      );
+      const data = await response.json();
+      if (data.Search) {
+        setSuggestions(data.Search.slice(0, 5));
+      } else {
+        setSuggestions([]);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setSuggestions([]);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const query = e.target.value;
+    onChange(e);
+    if (query) {
+      searchMovies(query);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      setActiveSuggestionIndex((prevIndex) =>
+        prevIndex === suggestions.length - 1 ? 0 : prevIndex + 1
+      );
+    } else if (e.key === "ArrowUp") {
+      setActiveSuggestionIndex((prevIndex) =>
+        prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1
+      );
+    } else if (e.key === "Enter") {
+      if (suggestions.length > 0) {
+        const selectedMovie = suggestions[activeSuggestionIndex];
+        setMovieToAdd({
+          imdbID: selectedMovie.imdbID,
+          title: selectedMovie.Title,
+        });
+        setSuggestions([]);
+        onChange({ target: { value: "" } }); // Réinitialiser la barre de recherche
+      }
+    }
+  };
+
+  const handleClickSuggestion = (imdbID, title) => {
+    setMovieToAdd({ imdbID, title });
+    setSuggestions([]);
+    onChange({ target: { value: "" } }); // Réinitialiser la barre de recherche
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const handleAddToCategory = () => {
+    if (movieToAdd && selectedCategory) {
+      onAddToCategory(movieToAdd.imdbID, movieToAdd.title, selectedCategory);
+      setSelectedCategory("");
+      setMovieToAdd(null);
+    }
+  };
+
+  useEffect(() => {
+    const adjustPosition = () => {
+      if (suggestionsRef.current) {
+        const rect = suggestionsRef.current.getBoundingClientRect();
+        if (rect.bottom > window.innerHeight) {
+          suggestionsRef.current.classList.add("adjust-up");
+        } else {
+          suggestionsRef.current.classList.remove("adjust-up");
+        }
+      }
+    };
+
+    adjustPosition();
+    window.addEventListener("resize", adjustPosition);
+    return () => window.removeEventListener("resize", adjustPosition);
+  }, [suggestions]);
+
+  console.log("Categories in SearchBar before render:", categories);
+
+  if (!categories || !Array.isArray(categories)) {
+    console.error("Categories are undefined or not an array:", categories);
+    return null;
+  }
+
+  return (
+    <div className="search-bar-wrapper" onKeyDown={handleKeyDown}>
+      <div className="search-bar">
+        <input
+          type="text"
+          className="search-input"
+          placeholder={placeholder}
+          value={value}
+          onChange={handleInputChange}
+          ref={inputRef}
+        />
+      </div>
+      {suggestions.length > 0 && (
+        <div className="suggestions-list" ref={suggestionsRef}>
+          {suggestions.map((movie, index) => (
+            <div
+              className={`suggestion-item ${
+                index === activeSuggestionIndex ? "active" : ""
+              }`}
+              key={index}
+              onClick={() => handleClickSuggestion(movie.imdbID, movie.Title)}
+            >
+              <img src={movie.Poster} alt={movie.Title} />
+              <div className="suggestion-item-content">
+                <span>{movie.Title}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {movieToAdd && (
+        <div className="add-movie-to-category">
+          <select value={selectedCategory} onChange={handleCategoryChange}>
+            <option value="">Choisir une catégorie</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+          <button onClick={handleAddToCategory}>Ajouter à la catégorie</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+SearchBar.propTypes = {
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
+  onAddToCategory: PropTypes.func.isRequired,
+};
+
+export default SearchBar;
+"
+
+"
+.search-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  background-color: rgba(30, 30, 30, 0.9);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(133%, -7%);
+  z-index: 1000;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  transition: background 0.3s;
+  width: 100%;
+  background-color: rgba(30, 30, 30, 0.9);
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+  background-color: rgba(229, 21, 21, 0.8);
+}
+
+.suggestion-item img {
+  width: 70px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.suggestion-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: calc(100% - 80px);
+}
+
+.suggestion-item span {
+  color: #f1f1f1;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggestions-list.adjust-up {
+  top: auto;
+  bottom: calc(100% + 2px);
+}
+
+.add-movie-to-category {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.add-movie-to-category select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.add-movie-to-category button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e51515;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-movie-to-category button:hover {
+  background-color: #a61010;
+}
+"
+
+SectionTitle :
+"
+import React from "react";
+import "./SectionTitle.css";
+
+const SectionTitle = ({ title, description }) => {
+  return (
+    <div className="section-title">
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </div>
+  );
+};
+
+export default SectionTitle;
+"
+
+"
+/* src/components/SectionTitle.css */
+
+.section-title h1 {
+  text-align: center;
+  font-size: 2.5em; /* Augmente la taille du titre */
+  margin-bottom: 20px; /* Espace en-dessous du titre */
+}
+
+.section-title p {
+  text-align: center;
+  font-size: 1.3em; /* Augmente la taille du texte */
+  line-height: 1.6; /* Augmente l'espacement entre les lignes pour une meilleure lisibilité */
+  margin-bottom: 20px; /* Espace en-dessous du paragraphe */
+  color: #f1f1f1; /* S'assure que le texte soit visible */
+}
+"

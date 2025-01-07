@@ -1,0 +1,94 @@
+
+/* Typographie Générale */
+body {
+  font-family: "Open Sans", sans-serif;
+  background: url("../public/media/images/movie-theater-2093264_1920.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  color: #1e1e1e;
+  margin: 0;
+  padding: 0;
+}
+
+/* Titres */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto Slab", serif;
+  text-transform: uppercase;
+  color: #e51515;
+}
+
+/* Paragraphes */
+p {
+  font-family: "Open Sans", sans-serif;
+  color: #1e1e1e;
+}
+
+/* Liens */
+a {
+  font-family: "Open Sans", sans-serif;
+  text-decoration: none;
+  color: #1e1e1e;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #e51515;
+}
+
+a:active {
+  text-decoration: underline;
+  color: #e51515;
+}
+
+/* Boutons */
+button {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border: 1px solid #1e1e1e;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+button:hover {
+  background-color: #e51515;
+  color: #f1f1f1;
+}
+
+button:active {
+  background-color: #f1f1f1;
+  color: #e51515;
+  border: 1px solid #e51515; 
+}
+
+/* Annonces d'erreurs, de warnings et d'informations */
+.error-message {
+  background-color: #e51515;
+  color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.warning-message {
+  background-color: #f1f1f1;
+  color: #1e1e1e;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.info-message {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Structure de la Page */
+main {
+  padding: 20px;
+}

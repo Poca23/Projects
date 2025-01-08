@@ -1,7 +1,7 @@
 Couleurs qui évoquent la fraîcheur, la gourmandise et la convivialité. Voici quelques palettes de couleurs tendance pour la cuisine en 2024 et 2025 qui pourraient également être adaptées pour votre application :
 
-
-
+---------------------------------------------------------
+Charte colorimétrique:
 ---------------------------------------------------------
 - Blanc cassé et vert sauge : Un blanc cassé apporte une luminosité subtile, tandis que le vert sauge ajoute une touche de nature et de fraîcheur :
 
@@ -207,3 +207,7 @@ a:active {
     background-color: #CD5C5C; /* Rouge pâle */
     color: #FFFFFF; /* Blanc */
 }
+
+---------------------------------------------------------
+Charte Typographique :
+---------------------------------------------------------

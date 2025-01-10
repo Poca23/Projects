@@ -76,3 +76,4 @@ React Share : Pour intégrer facilement les fonctionnalités de partage.
 
 
 Cette combinaison de technologies permettra de créer une application de livre de recettes complète, interactive et conviviale, accessible en ligne et hors ligne.
+

@@ -1,0 +1,1 @@
+/home/greta/.nvm/versions/node/v23.4.0/bin/node /home/greta/Desktop/workspace/Projects/projectsReact/Blog-Cinema/backup.js

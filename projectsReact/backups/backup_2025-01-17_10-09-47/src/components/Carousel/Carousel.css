@@ -1,0 +1,76 @@
+.carousel-item img {
+  height: 600px;
+  width: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.carousel-movie {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.movie-details {
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.movie-details h5 {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.movie-details p {
+  color: rgba(255, 255, 255, 0.7);
+  padding: 10px;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: rgba(0, 0, 0, 0.575);
+  border-radius: 5px;
+  width: 100%;
+  margin: 0;
+}
+
+.movie-details a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+
+.movie-details a:hover {
+  text-decoration: underline;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid transparent;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, color 0.3s ease;
+  border-radius: 50%;
+  top: 25px;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  border-color: #ff5722;
+  color: #ff5722;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 2rem;
+  height: 2rem;
+  pointer-events: none;
+}

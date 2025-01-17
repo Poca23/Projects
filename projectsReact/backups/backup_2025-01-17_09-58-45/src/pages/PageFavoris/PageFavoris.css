@@ -1,0 +1,223 @@
+.favorites-page {
+  padding: 20px;
+  background: url("../../../public/media/images/movie-theater-2093264_1920.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.add-movie-card {
+  background-color: rgba(30, 30, 30, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  height: 150px;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: visible;
+}
+
+.add-movie-card input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.movies-section {
+  margin-bottom: 40px;
+  margin-left: 30px;
+}
+
+.movies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.movie-card {
+  background-color: rgba(30, 30, 30, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  height: 300px;
+  width: 200px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  color: #f1f1f1;
+  font-size: 16px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.movie-card p {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+.movie-card button {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 30, 30, 1) 0%,
+    rgba(229, 21, 21, 1) 40%,
+    rgba(30, 30, 30, 0.6143187066974596) 79%
+  );
+  color: #f1f1f1;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.movie-card button:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(229, 21, 21, 1) 0%,
+    rgba(30, 30, 30, 1) 40%,
+    rgba(229, 21, 21, 1) 79%
+  );
+}
+
+.search-bar {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.search-bar .search-btn {
+  background: linear-gradient(
+    180deg,
+    rgba(30, 30, 30, 1) 0%,
+    rgba(229, 21, 21, 1) 40%,
+    rgba(30, 30, 30, 0.6143187066974596) 79%
+  );
+  color: #f1f1f1;
+  border: 1px solid #1e1e1e;
+  border-left: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  transition: background 0.3s;
+}
+
+.search-bar .search-btn:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(229, 21, 21, 1) 0%,
+    rgba(30, 30, 30, 1) 40%,
+    rgba(229, 21, 21, 1) 79%
+  );
+}
+
+.search-bar .search-btn:active {
+  background-color: #f1f1f1;
+  color: #e51515;
+  border: 1px solid #e51515;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(30, 30, 30, 0.9);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  transform: translateX(50%);
+  gap: 5px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  padding: 2px;
+  transition: background 0.3s;
+  width: 100%;
+  height: 75px;
+  margin-bottom: 1px;
+  background-color: rgba(30, 30, 30, 0.9);
+}
+
+.suggestion-item:hover {
+  background-color: rgba(229, 21, 21, 0.8);
+}
+
+.suggestion-item img {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.suggestion-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.suggestion-item span {
+  color: #f1f1f1;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(100% - 60px);
+}
+
+.favorites-page .suggestions-list {
+  transform: translate(75%, -156%);
+}

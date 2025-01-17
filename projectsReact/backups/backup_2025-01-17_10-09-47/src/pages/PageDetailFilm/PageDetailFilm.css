@@ -1,0 +1,106 @@
+.film-detail-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  color: #f1f1f1;
+  background-color: #121212;
+}
+
+.left-column,
+.middle-column,
+.right-column {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.middle-column {
+  margin-left: -20px;
+}
+
+.film-poster {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.film-category,
+.film-rating,
+.film-ratings {
+  margin-top: 20px;
+}
+
+.film-title-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.film-icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: 10px;
+  color: inherit;
+}
+
+.film-icons .heart-button {
+  color: white;
+}
+
+.film-icons .heart-button:hover {
+  color: #ff6347;
+}
+
+.film-icons .heart-button:active {
+  color: #ff0000;
+}
+
+.film-info h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.film-description {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: #f1f1f1;
+  text-align: left;
+}
+
+.film-details {
+  font-size: 1rem;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.film-details h3 {
+  font-size: 1.1rem;
+  color: #f1f1f1;
+  margin-bottom: 10px;
+}
+
+.film-trailer {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  border: none;
+}
+
+.film-rating .fa-star {
+  transition: color 0.3s ease;
+}
+
+.film-rating .fa-star:hover {
+  color: #ffd700;
+}
+
+.film-rating .fa-star:hover ~ .fa-star {
+  color: gray;
+}
